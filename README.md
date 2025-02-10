@@ -35,7 +35,7 @@ I’m a **cheerful**, **athletic**, and **friendly** person who enjoys coding wi
 **Course & Year:** BSIT - 3  
 
 **Short Description:**  
-I’m currently pursuing a **Bachelor of Science in Information Technology** at **Cebu Institute of Technology - University**. My focus is on **frontend development**, though I have experience with **backend development** as well. I’m always eager to learn new technologies, improve my skills, and work on projects with my team to grow as a developer.  
+I am currently taking a Bachelor of Science in Information Technology at Cebu Institute of Technology - University. I enjoy working on frontend development but also have experience in backend development. I am currently working on my project for IT342 together with my other two team members. I am flexible and eager to learn new technologies. My goal is to continuously improve my coding skills, and I am looking forward to more projects and opportunities to enhance my knowledge and skills.  
 
 🍀  
 
