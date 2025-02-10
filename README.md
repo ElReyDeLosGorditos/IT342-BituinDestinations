@@ -1,5 +1,15 @@
 # ⭐ IT342-BituinDestinations ⭐
 
+## Product Description
+<Wala pa, Kalimot ko>
+
+## List of Features
+<Wala pa, Kalimot ko>
+
+## Links
+- **Figma:** https://www.figma.com/design/DmN5BW5cx8sSg2TPualg2E/Untitled?node-id=0-1&t=4gJ3Q1bzM8KOOCpU-1
+- **ERD:** https://lucid.app/lucidchart/c925c848-dd6c-4024-8b98-a8a9178b4c29/edit?viewport_loc=-516%2C-264%2C2992%2C1297%2C0_0&invitationId=inv_72aa8d91-f2ec-492a-be3b-edd2ab944207
+
 ## Team Members:
 ## 🚀 **Member 1**
 - **Name:** John Lawrence C. Regis
