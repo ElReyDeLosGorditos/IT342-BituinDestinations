@@ -17,7 +17,7 @@
   Offers comprehensive travel guides, itineraries, and blog posts about popular destinations, travel tips, and cultural insights. It helps customers plan their trips with detailed information about each location.
 
 - **Online Booking System**  
-  A seamless booking process for flights, hotels, or tour packages. Customers can select their preferred options, view a summary, and proceed to payment—all without leaving the site.
+  A seamless booking process for flights, hotels, or tour packages. Customers can select their preferred options, view a summary, and proceed to payment.
 
 #### **Mobile Functions:**
 - **Flight and Hotel Tracking**  
@@ -27,13 +27,13 @@
   A feature that allows travelers to check in for flights directly from the app and receive their digital boarding pass on their phone, making travel more convenient and paperless.
 
 - **Trip Planner & Itinerary Management**  
-  An interactive feature where users can create, organize, and manage their travel itineraries. This can include flight details, accommodation, activities, and more—all accessible from the mobile app.
+  An interactive feature where users can create, organize, and manage their travel itineraries. This can include flight details, accommodation, activities, and more.
 
 ---
 
 ### 🔗 **Useful Links**  
 - **Figma:** [View Design on Figma](https://www.figma.com/design/DmN5BW5cx8sSg2TPualg2E/Untitled?node-id=0-1&t=4gJ3Q1bzM8KOOCpU-1)
-- **Gantt Chart (Click-Up):** [View Gantt Chart](https://app.clickup.com/9016758132/v/l/6-901606227183-1)
+- **Gantt Chart:** [View Gantt Chart on Click-Up](https://app.clickup.com/9016758132/v/l/6-901606227183-1)
 - **ERD:** [View ERD on Lucidchart](https://lucid.app/lucidchart/c925c848-dd6c-4024-8b98-a8a9178b4c29/edit?viewport_loc=-516%2C-264%2C2992%2C1297%2C0_0&invitationId=inv_72aa8d91-f2ec-492a-be3b-edd2ab944207)
 
 ---
