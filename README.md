@@ -1,14 +1,39 @@
 # ⭐ **IT342 - BituinDestinations** ⭐
 
-### 🌟 **Product Description**  
-*Wala pa, Kalimot ko*
+### 🌟 **Product Description**
+*BituinDestinations makes planning your perfect trip easy and exciting. We offer a simple platform where you can discover and book unique travel experiences. Whether you’re looking for a relaxing vacation, an adventure, or a hidden gem, we have destinations to suit every style.*
 
-### 🛠️ **List of Features**  
-*Wala pa, Kalimot ko*
+*Our team of experts helps you create a personalized travel plan with great suggestions and tips. We take care of the details so you can enjoy your trip stress-free. With BituinDestinations, booking your dream getaway is quick and easy. Explore amazing places and make your travel dreams come true with us!*
+
+---
+
+### 🛠️ **List of Features**
+
+#### **Web Functions:**
+- **Interactive Search and Filter Tool**  
+  Allows users to search for flights, hotels, and tours based on various filters like location, price range, dates, and preferences. The results dynamically adjust based on user input.
+
+- **Destination Guides and Blog**  
+  Offers comprehensive travel guides, itineraries, and blog posts about popular destinations, travel tips, and cultural insights. It helps customers plan their trips with detailed information about each location.
+
+- **Online Booking System**  
+  A seamless booking process for flights, hotels, or tour packages. Customers can select their preferred options, view a summary, and proceed to payment—all without leaving the site.
+
+#### **Mobile Functions:**
+- **Flight and Hotel Tracking**  
+  Allows users to track the status of their flight, hotel bookings, and transfers. This feature keeps travelers informed in real-time about any changes or updates to their plans.
+
+- **Mobile Check-in & Boarding Pass**  
+  A feature that allows travelers to check in for flights directly from the app and receive their digital boarding pass on their phone, making travel more convenient and paperless.
+
+- **Trip Planner & Itinerary Management**  
+  An interactive feature where users can create, organize, and manage their travel itineraries. This can include flight details, accommodation, activities, and more—all accessible from the mobile app.
+
+---
 
 ### 🔗 **Useful Links**  
 - **Figma:** [View Design on Figma](https://www.figma.com/design/DmN5BW5cx8sSg2TPualg2E/Untitled?node-id=0-1&t=4gJ3Q1bzM8KOOCpU-1)
-- **Gantt Chart (Click-Up):** [View Gantt Chart](https://app.clickup.com/9016758132/v/l/li/901606227183)
+- **Gantt Chart (Click-Up):** [View Gantt Chart](https://app.clickup.com/9016758132/v/l/6-901606227183-1)
 - **ERD:** [View ERD on Lucidchart](https://lucid.app/lucidchart/c925c848-dd6c-4024-8b98-a8a9178b4c29/edit?viewport_loc=-516%2C-264%2C2992%2C1297%2C0_0&invitationId=inv_72aa8d91-f2ec-492a-be3b-edd2ab944207)
 
 ---
