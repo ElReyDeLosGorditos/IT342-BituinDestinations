@@ -7,6 +7,7 @@ import edu.cit.bituindestinations.Entity.UserEntity;
 import edu.cit.bituindestinations.Service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -22,7 +23,17 @@ public class UserController {
         //TODO: process POST request
         
         return userService.saveUser(user);
+        
     }
-    
+     
+    @GetMapping("/secured")
+    public String secured() {
+        return "Hello secure";  
+    }
+
+    @GetMapping("/homepage")
+public String homepage() {
+    return "homepage";      
+}
 
 }
