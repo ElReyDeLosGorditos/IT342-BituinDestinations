@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BituinDestinationsApplication<BituinDestinations>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "edu.cit.bituindestinations.BituinDestinationsApplication",
+            "projectName": "BituinDestinations",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
