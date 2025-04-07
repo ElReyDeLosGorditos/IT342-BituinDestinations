@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.alpez.Auth.JwtUtil;
+//import com.example.alpez.Auth.JwtUtil;
 import com.example.alpez.Entity.UserEntity;
 import com.example.alpez.Repo.UserRepo;
 
@@ -18,8 +18,8 @@ import com.example.alpez.Repo.UserRepo;
 public class UserService {
     @Autowired
     private UserRepo userRepo;
-    @Autowired
-    private JwtUtil jwtUtil;
+    //@Autowired
+    //private JwtUtil jwtUtil;
     
     
 
@@ -44,9 +44,8 @@ public class UserService {
             if (user != null) {
                 System.out.println("User found: " + user.getEmail()); 
                 if (user.getPassword().equals(password)) { 
-                    System.out.println("Password is correct. Generating token."); 
-                    System.out.println(jwtUtil.generateToken(user)); 
-                    return jwtUtil.generateToken(user); 
+                    System.out.println("Password is correct."); 
+                    return "Authentication successful";
                 } else {
                     System.out.println("Invalid credentials: password does not match."); 
                     throw new RuntimeException("Invalid credentials"); 
@@ -81,7 +80,7 @@ public class UserService {
         }
     }
     
-
     
+
     
 }

@@ -26,21 +26,24 @@ public class TourPackageEntity {
     private String duration;
 
     @Column(name = "price", nullable = false)
-    private String price;
+    private Double price;
 
+    @Column(name = "image_url", nullable = true)
+    private String imageUrl;
 
     
     public TourPackageEntity() {
         super();
     }
 
-    public TourPackageEntity(int packageId, String name, String location, String duration, String price ) {
+    public TourPackageEntity(int packageId, String name, String location, String duration, Double price, String imageUrl) {
         super();
         this.packageId = packageId;
         this.name = name;
         this.location = location;
         this.duration = duration;     
-        this.price = price;     
+        this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     public int getPackageId() {
@@ -74,11 +77,20 @@ public class TourPackageEntity {
     public void setDuration(String duration) {
         this.duration = duration;
     }
-    public String getPrice() {
+    
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

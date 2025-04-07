@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Custom styles can be added below */
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #314f31;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #000000;
+}
+button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+
+  @keyframes hoverCircle {
+    0% {
+      transform: scale(0);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+  
+  .landing-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border: 2px solid white; /* White border before hover */
+    color: white; /* Default text color */
+    background-color: transparent; /* Transparent background by default */
+    padding: 12px 48px; /* Padding for button size */
+    font-weight: 600;
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 1.125rem; /* Adjust size as needed */
+    transition: all 0.3s ease;
+  }
+  
+  .landing-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: width 0.4s, height 0.4s, top 0.4s, left 0.4s;
+    transform: translate(-50%, -50%);
+  }
+  
+  .landing-btn:hover::before {
+    width: 250%;
+    height: 250%;
+    top: 50%;
+    left: 50%;
+  }
+  
+  .landing-btn:hover {
+    color: black; /* Change text color to black on hover */
+    background-color: white; /* White background on hover */
+  }
+  
+  .landing-btn:active::before {
+    animation: hoverCircle 0.6s forwards;
+  }
+
+  .navbar-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border: transparent;  /* Transparent border initially */
+    background-color: transparent;  /* Transparent background initially */
+    color: white;  /* White text color */
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 1.125rem;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-btn:hover {
+    color: black;  /* Text color change to black on hover */
+    background-color: rgba(255, 255, 255, 0.081);  /* White background on hover */
+  }
+  
+  /* Hover circle effect for Navbar buttons */
+  .navbar-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: width 0.4s, height 0.4s, top 0.4s, left 0.4s;
+    transform: translate(-50%, -50%);
+  }
+  
+  .navbar-btn:hover::before {
+    width: 250%;
+    height: 250%;
+    top: 50%;
+    left: 50%;
+  }
+  
+  .navbar-btn:active::before {
+    animation: hoverCircle 0.6s forwards;
+  }
+}
