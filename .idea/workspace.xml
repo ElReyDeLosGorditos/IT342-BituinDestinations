@@ -7,17 +7,27 @@
     <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/node_modules/.package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/JwtRequestFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/JwtUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/OAuth2LoginSuccessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/OAuth2LoginSuccessHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/TicketController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/TourPackageController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Entity/TourPackageEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Entity/TourPackageEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Entity/TicketEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Entity/TourPackageEntity.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/TourPackageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/TourPackageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Repo/TicketRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Repo/TourPackageRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/TicketService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/TourPackageService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/AuthCallback.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/AuthCallback.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/Login.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +35,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="google-auth-branch" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -51,9 +66,9 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "userloginsignup",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/plsss loooordddd backup/BACKUP V3/IT342-BituinDestinations/frontend-web/BituinFrontWeb",
+    "last_opened_file_path": "C:/Users/Kyle Inion/Desktop/git/IT342-BituinDestinations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,8 +81,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
@@ -84,6 +99,8 @@
       <workItem from="1739145998480" duration="3510000" />
       <workItem from="1743946010613" duration="188000" />
       <workItem from="1743983871910" duration="924000" />
+      <workItem from="1744955865986" duration="33000" />
+      <workItem from="1744976536996" duration="1226000" />
     </task>
     <servers />
   </component>

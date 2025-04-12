@@ -2,12 +2,14 @@ package com.example.alpez.Auth;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -65,8 +67,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
                     if (userEntityOptional.isPresent() && jwtUtil.validateToken(jwt, userId)) {
                         UserEntity userEntity = userEntityOptional.get();
-                        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                                userEntity, null, Collections.emptyList());
+
+                        // Create authorities list based on user role
+                        List<SimpleGrantedAuthority> authorities = Collections.singletonList(
+                                new SimpleGrantedAuthority(userEntity.getRole().toString())
+                        );
+
+                        UsernamePasswordAuthenticationToken authentication =
+                                new UsernamePasswordAuthenticationToken(userEntity, null, authorities);
+
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                         logger.debug("User authenticated: {}", userId);
                     } else {

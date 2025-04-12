@@ -39,32 +39,40 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             logger.info("OAuth2 authentication success, processing user info");
             OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
             Map<String, Object> attributes = oAuth2User.getAttributes();
-            
+
             // Log the attributes for debugging
             logger.info("OAuth2 User Attributes: {}", attributes);
-            
+
             // Extract user information from OAuth2 attributes
             String email = (String) attributes.get("email");
             String name = (String) attributes.get("name");
-            
+
             if (email == null) {
                 logger.error("Email not found in OAuth2 user attributes");
                 response.sendRedirect("http://localhost:5173/login?error=missing_email");
                 return;
             }
-            
+
             // If name is not available, use given_name or fallback to email
             if (name == null) {
                 name = (String) attributes.get("given_name");
                 if (name == null) {
-                    name = email.split("@")[0]; // Use part of email as name if no name is provided
+                    name = email.split("@")[0];
                 }
             }
 
             logger.info("Processing user with email: {}, name: {}", email, name);
 
-            // Find or create user
+
+// Find user - check if admin
             Optional<UserEntity> existingUser = userRepo.findByEmail(email);
+            if (existingUser.isPresent() && existingUser.get().isAdmin()) {
+                logger.error("Admin accounts cannot log in via OAuth2");
+                response.sendRedirect("http://localhost:5173/login?error=admin_oauth_not_allowed");
+                return;
+            }
+
+            // Create or update regular user
             UserEntity user;
             if (existingUser.isPresent()) {
                 user = existingUser.get();
@@ -73,11 +81,12 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
                 user = new UserEntity();
                 user.setEmail(email);
                 user.setName(name);
+                user.setRole(UserEntity.Role.USER); // Ensure OAuth users are always USER role
                 userRepo.save(user);
                 logger.info("Created new user with email: {}", email);
             }
 
-            // Generate JWT token for this user
+            // Generate JWT token
             String jwtToken = jwtUtil.generateToken(user);
             int userid = user.getUserId();
             

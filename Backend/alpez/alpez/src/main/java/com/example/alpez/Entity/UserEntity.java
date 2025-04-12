@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,6 +14,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "User")
 public class UserEntity {
+
+    public enum Role {
+        USER, ADMIN
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,22 +33,27 @@ public class UserEntity {
     @Column(name = "password", nullable = true)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role = Role.USER; // Default role is USER
 
     public UserEntity() {
         super();
     }
 
-    public UserEntity(int userId, String name, String email, String password ) {
+    public UserEntity(int userId, String name, String email, String password, Role role) {
         super();
         this.userId = userId;
         this.name = name;
         this.email = email;
-        this.password = password;        
+        this.password = password;
+        this.role = role;
     }
 
     public static boolean isEmpty(Optional<UserEntity> user) {
-        return !user.isPresent(); // ✅ Inverts `isPresent()`
+        return !user.isPresent();
     }
+
     public int getUserId() {
         return userId;
     }
@@ -75,13 +86,15 @@ public class UserEntity {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public boolean isAdmin() {
+        return Role.ADMIN.equals(this.role);
+    }
 }
-
-    // import java.util.List;
-
-
-    // @OneToMany(mappedBy = "user")
-    // private List<ReminderEntity> reminders;
-
-    // @OneToMany(mappedBy = "user")
-    // private List<TicketEntity> tickets;

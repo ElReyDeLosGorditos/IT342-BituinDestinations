@@ -38,18 +38,32 @@ public class UserController {
 
     //CREATE
     @PostMapping("/save")
-    public UserEntity saveUser(@RequestBody UserEntity user){
-        return userService.saveUser(user);
+    public ResponseEntity<?> saveUser(@RequestBody UserEntity user) {
+        try {
+            UserEntity savedUser = userService.saveUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+        } catch (RuntimeException e) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", e.getMessage());
+
+            // Return appropriate status code based on error type
+            if (e.getMessage().contains("Email already exists")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+            }
+        }
     }
 
     //READ
 
      @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user) {    
+    public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user) {
         try {
             String authResult = userService.authenticateUser(user.getEmail(), user.getPassword());
             System.out.print("Logged in successfully with email: " + user.getEmail());
-            
+
             Map<String, Object> response = new HashMap<>();
             response.put("status", "success");
             response.put("message", authResult);
@@ -61,7 +75,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
         }
     }
-    
+
     @GetMapping("/getAll")
     public List<UserEntity> getAllUsers(){
         return userService.getAllUsers();
@@ -70,7 +84,7 @@ public class UserController {
     public Optional<UserEntity> getUserbyUserId(int userId){
         return userService.getUserByUserId(userId);
     }
-   
+
     //UPDATE
     @PutMapping("/update/{userId}")
     public UserEntity updateUser(@PathVariable int userId, @RequestBody UserEntity user){
