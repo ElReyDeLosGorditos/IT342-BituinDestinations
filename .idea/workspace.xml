@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Repo/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Repo/UserRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/Login.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +47,7 @@
     &quot;Node.js.App.jsx.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;userloginsignup&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Bituin-Regis-features&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/BOKINGZ/Documents/GitHub/IT342-BituinDestinations&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -95,6 +92,7 @@
       <workItem from="1745051924473" duration="8000" />
       <workItem from="1745052528829" duration="1759000" />
       <workItem from="1745054658558" duration="24000" />
+      <workItem from="1745056595605" duration="1401000" />
     </task>
     <servers />
   </component>
