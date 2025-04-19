@@ -30,24 +30,25 @@ function Login() {
       // Call the login API
       const response = await axios.post('http://localhost:8080/user/login', formData);
 
-      if (response.data.status === 'success') {
+      if (response.data.status === 'success' && response.data.user) { // Assuming your backend now returns user info on successful login
         // Store login status
         localStorage.setItem('isLoggedIn', 'true');
 
-        // Get user ID by email
-        const userResponse = await axios.get(`http://localhost:8080/user/getAll`);
-        const users = userResponse.data;
-        const user = users.find(u => u.email === formData.email);
-
-        if (user) {
-          localStorage.setItem('userId', user.userId);
-          localStorage.setItem('userName', user.name);
-        }
+        // Store user ID and name directly from the login response
+        localStorage.setItem('userId', response.data.user.userId);
+        localStorage.setItem('userName', response.data.user.name);
 
         // Redirect to home page
         navigate('/home');
-      } else {
-        setError('Invalid email or password. Please try again.');
+      } else if (response.data.status === 'success') {
+        // Handle case where user info isn't directly returned (less ideal)
+        // You might still need to fetch user info in a different way or on the next page
+        localStorage.setItem('isLoggedIn', 'true');
+        navigate('/home'); // Redirect anyway, and perhaps fetch user info on the home page
+        console.warn("User data not directly received in login response. Consider updating the backend.");
+      }
+      else {
+        setError(response.data?.message || 'Invalid email or password. Please try again.');
       }
     } catch (error) {
       console.error('Login error:', error);
