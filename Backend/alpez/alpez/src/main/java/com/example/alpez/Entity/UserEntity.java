@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,19 +28,33 @@ public class UserEntity {
 
     @Column(name = "password", nullable = true)
     private String password;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
 
 
     public UserEntity() {
         super();
     }
 
-    public UserEntity(int userId, String name, String email, String password ) {
+    public UserEntity(int userId, String name, String email, String password, Role role) {
         super();
         this.userId = userId;
         this.name = name;
         this.email = email;
-        this.password = password;        
+        this.password = password;
+        this.role = role;
     }
+    
+    public Role getRole() {
+        return role;
+    }
+    
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    
 
     public static boolean isEmpty(Optional<UserEntity> user) {
         return !user.isPresent(); // ✅ Inverts `isPresent()`
