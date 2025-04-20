@@ -8,6 +8,10 @@ import com.example.alpez.Entity.TourPackageEntity;
 
 import java.util.List;
 
+//@Repository
+//public interface TourPackageRepo extends JpaRepository<TourPackageEntity, Integer> {
+//
+//}
 
 @Repository
 public interface TourPackageRepo extends JpaRepository<TourPackageEntity, Integer> {

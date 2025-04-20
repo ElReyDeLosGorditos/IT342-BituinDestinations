@@ -1,73 +1,100 @@
 package com.example.alpez.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "TourPackage")
+@Table(name = "tour_package")
 public class TourPackageEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "package_id")
-    private int packageId;
+    private int id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "location", nullable = false)
-    private String location;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "duration", nullable = false)
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Column(name = "duration")
     private String duration;
 
-    @Column(name = "price", nullable = false)
-    private Double price;
+    @Column(name = "available_slots")
+    private Integer availableSlots;
 
-    @Column(name = "image_url", nullable = true)
-    private String imageUrl;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    
-    public TourPackageEntity() {
-        super();
-    }
+    // Many-to-one: TourPackage belongs to one Destination
+    @ManyToOne
+    @JoinColumn(name = "destination_id", nullable = false)
+    private DestinationEntity destination;
 
-    public TourPackageEntity(int packageId, String name, String location, String duration, Double price, String imageUrl) {
-        super();
-        this.packageId = packageId;
-        this.name = name;
-        this.location = location;
-        this.duration = duration;     
+    // One-to-many: TourPackage has many bookings
+    @OneToMany(mappedBy = "tourPackage", cascade = CascadeType.ALL)
+    private List<BookingEntity> bookings;
+
+    // One-to-many: TourPackage has many reviews
+    @OneToMany(mappedBy = "tourPackage", cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviews;
+
+    // One-to-many: TourPackage has many wishlists
+    @OneToMany(mappedBy = "tourPackage", cascade = CascadeType.ALL)
+    private List<WishlistEntity> wishlists;
+
+    public TourPackageEntity() {}
+
+    // Constructor without lists
+    public TourPackageEntity(int id, String title, String description, BigDecimal price, String duration, Integer availableSlots, LocalDateTime createdAt, DestinationEntity destination) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.duration = duration;
+        this.availableSlots = availableSlots;
+        this.createdAt = createdAt;
+        this.destination = destination;
     }
+
+    // Getters and setters
 
     public int getPackageId() {
-        return packageId;
+        return id;
     }
 
-    public void setPackageId(int packageId) {
-        this.packageId = packageId;
+    public void setPackageId(int id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getLocation() {
-        return location;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getDuration() {
@@ -77,20 +104,52 @@ public class TourPackageEntity {
     public void setDuration(String duration) {
         this.duration = duration;
     }
-    
-    public Double getPrice() {
-        return price;
+
+    public Integer getAvailableSlots() {
+        return availableSlots;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setAvailableSlots(Integer availableSlots) {
+        this.availableSlots = availableSlots;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public DestinationEntity getDestination() {
+        return destination;
+    }
+
+    public void setDestination(DestinationEntity destination) {
+        this.destination = destination;
+    }
+
+    public List<BookingEntity> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<BookingEntity> bookings) {
+        this.bookings = bookings;
+    }
+
+    public List<ReviewEntity> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewEntity> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<WishlistEntity> getWishlists() {
+        return wishlists;
+    }
+
+    public void setWishlists(List<WishlistEntity> wishlists) {
+        this.wishlists = wishlists;
     }
 }

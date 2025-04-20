@@ -25,20 +25,24 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
+    // Check
     @GetMapping("/print")
     public String print() {
         return "Hello, Ticket! Test";
     }
 
+    // Create
     @PostMapping("/save")
 public TicketEntity saveTicket(@RequestBody TicketEntity ticket) {
         return ticketService.saveTicket(ticket);
 }
 
+    // Read
     @GetMapping("/getAll")
     public List<TicketEntity> getAllTickets() {
         return ticketService.getAllTicket();
     }
+    // Update by ID
     @PutMapping("/update")
     public TicketEntity updateTicket(@RequestParam int Id, @RequestBody TicketEntity ticket) {
         return ticketService.updateTicket(Id, ticket);

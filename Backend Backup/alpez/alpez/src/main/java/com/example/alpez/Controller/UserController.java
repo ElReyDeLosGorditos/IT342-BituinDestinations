@@ -36,11 +36,13 @@ public class UserController {
         return "I miss you!";
     }
 
+    //CREATE
     @PostMapping("/save")
     public UserEntity saveUser(@RequestBody UserEntity user){
         return userService.saveUser(user);
     }
 
+    //READ
 
      @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user) {    
@@ -69,11 +71,13 @@ public class UserController {
         return userService.getUserByUserId(userId);
     }
    
+    //UPDATE
     @PutMapping("/update/{userId}")
     public UserEntity updateUser(@PathVariable int userId, @RequestBody UserEntity user){
         return userService.updateUser(userId, user);
     }
 
+    //DELETE
     @DeleteMapping("/delete/{userId}")
     public String deleteUser(@PathVariable int userId){
         return userService.deleteUser(userId);

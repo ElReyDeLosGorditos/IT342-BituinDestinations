@@ -1,50 +1,11 @@
 package com.example.alpez.Controller;
 
-import java.util.List;
-
+import com.example.alpez.Entity.TourPackageEntity;
+import com.example.alpez.Service.TourPackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.alpez.Entity.TourPackageEntity;
-import com.example.alpez.Service.TourPackageService;
-
-//@RestController
-//@CrossOrigin
-//@RequestMapping("/tourpackage")
-//public class TourPackageController {
-//    @Autowired
-//    TourPackageService tourpackageService;
-//
-//    @GetMapping("/print")
-//    public String print(){
-//        return "I dont you!";
-//    }
-//
-//    //CREATE
-//    @PostMapping("/save")
-//    public TourPackageEntity saveTourPackage(@RequestBody TourPackageEntity tour){
-//        return tourpackageService.saveTourPackage(tour);
-//    }
-//
-//    //READ
-//    @GetMapping("/getAll")
-//    public List<TourPackageEntity> getAllTourPackages(){
-//        return tourpackageService.getAllTourPackage();
-//    }
-//
-//    //UPDATE
-//    @PutMapping("/update/{packageId}")
-//    public TourPackageEntity updateTourPackage(@PathVariable int packageId, @RequestBody TourPackageEntity tour){
-//        return tourpackageService.updateTourPackage(packageId, tour);
-//    }
-//
-//    //DELETE
-//    @DeleteMapping("/delete/{packageId}")
-//    public String deleteReservation(@PathVariable int packageId){
-//        return tourpackageService.deleteTourPackage(packageId);
-//    }
-//}
-
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -52,26 +13,31 @@ import com.example.alpez.Service.TourPackageService;
 public class TourPackageController {
 
     @Autowired
-    TourPackageService tourpackageService;
+    private TourPackageService tourPackageService;
 
     @PostMapping("/save")
-    public TourPackageEntity saveTourPackage(@RequestBody TourPackageEntity tour) {
-        return tourpackageService.saveTourPackage(tour);
+    public TourPackageEntity saveTourPackage(@RequestBody TourPackageEntity tourPackage) {
+        return tourPackageService.createTourPackage(tourPackage);
     }
 
     @GetMapping("/getAll")
     public List<TourPackageEntity> getAllTourPackages() {
-        return tourpackageService.getAllTourPackage();
+        return tourPackageService.getAllTourPackages();
+    }
+
+    @GetMapping("/{packageId}")
+    public TourPackageEntity getTourPackageById(@PathVariable int packageId) {
+        return tourPackageService.getTourPackageById(packageId).orElse(null);
     }
 
     @PutMapping("/update/{packageId}")
-    public TourPackageEntity updateTourPackage(@PathVariable int packageId, @RequestBody TourPackageEntity tour) {
-        return tourpackageService.updateTourPackage(packageId, tour);
+    public TourPackageEntity updateTourPackage(@PathVariable int packageId, @RequestBody TourPackageEntity updatedTourPackage) {
+        return tourPackageService.updateTourPackage(packageId, updatedTourPackage);
     }
 
     @DeleteMapping("/delete/{packageId}")
     public String deleteTourPackage(@PathVariable int packageId) {
-        return tourpackageService.deleteTourPackage(packageId);
+        return tourPackageService.deleteTourPackage(packageId);
     }
 
     @GetMapping("/search")
@@ -80,6 +46,6 @@ public class TourPackageController {
             @RequestParam(required = false) String sortBy,
             @RequestParam(required = false) String sortDir
     ) {
-        return tourpackageService.searchTourPackages(keyword, sortBy, sortDir);
+        return tourPackageService.searchTourPackages(keyword, sortBy, sortDir);
     }
 }
