@@ -28,7 +28,8 @@ function Signup() {
       const response = await axios.post('http://localhost:8080/user/save', {
         name: formData.name,
         email: formData.email,
-        password: formData.password
+        password: formData.password,
+        role: "USER"
       })
 
       if (response.data) {

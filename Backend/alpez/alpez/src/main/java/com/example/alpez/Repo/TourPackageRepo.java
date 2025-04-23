@@ -11,5 +11,6 @@ import java.util.List;
 
 @Repository
 public interface TourPackageRepo extends JpaRepository<TourPackageEntity, Integer> {
-    List<TourPackageEntity> findByNameContainingIgnoreCaseOrLocationContainingIgnoreCase(String name, String location, Sort sort);
+    // Assuming 'location' is part of the associated 'DestinationEntity'
+    List<TourPackageEntity> findByTitleContainingIgnoreCaseOrDestination_DestinationNameContainingIgnoreCase(String title, String destinationName, Sort sort);
 }
