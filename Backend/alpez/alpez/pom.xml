@@ -114,7 +114,7 @@
      <artifactId>pinpoint-basic-login</artifactId>
      <version>3.0.2</version>
    </dependency>
- </dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>

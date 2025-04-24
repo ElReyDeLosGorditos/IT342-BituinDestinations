@@ -25,6 +25,34 @@ public class DestinationController {
     @Autowired
     private FileStorageService fileStorageService;
 
+    @PostMapping(value = "/save", consumes = "multipart/form-data")
+    public ResponseEntity<DestinationDTO> saveDestination(
+            @RequestParam("destinationName") String destinationName,
+            @RequestParam("destinationDescription") String destinationDescription,
+            @RequestParam("destinationType") String destinationType,
+            @RequestParam("region") String region,
+            @RequestParam("destinationLocation") String destinationLocation,
+            @RequestParam("destinationImage") MultipartFile destinationImage) {
+        try {
+            DestinationDTO destinationDTO = new DestinationDTO();
+            destinationDTO.setDestinationName(destinationName);
+            destinationDTO.setDestinationDescription(destinationDescription);
+            destinationDTO.setDestinationType(destinationType);
+            destinationDTO.setRegion(region);
+            destinationDTO.setDestinationLocation(destinationLocation);
+
+            if (destinationImage != null && !destinationImage.isEmpty()) {
+                String fileName = fileStorageService.storeFile(destinationImage);
+                destinationDTO.setDestinationImage(fileName);
+            }
+
+            DestinationDTO savedDestination = destinationService.saveDestination(destinationDTO);
+            return new ResponseEntity<>(savedDestination, HttpStatus.CREATED); // Use HttpStatus.CREATED for successful resource creation
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving destination: " + e.getMessage());
+        }
+    }
+
     @PutMapping(value = "/update/{id}", consumes = "multipart/form-data")
     public ResponseEntity<DestinationDTO> updateDestination(
             @PathVariable Integer id,
