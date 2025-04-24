@@ -1,7 +1,11 @@
 package com.example.alpez.Repo;
 
-import com.example.alpez.Entity.DestinationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface DestinationRepo extends JpaRepository<DestinationEntity, Long> {
+import com.example.alpez.Entity.Destination;
+
+@Repository
+public interface DestinationRepo extends JpaRepository<Destination, Integer> {
+    boolean existsByDestinationName(String destinationName);
 }

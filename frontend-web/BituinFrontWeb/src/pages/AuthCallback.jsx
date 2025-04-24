@@ -6,6 +6,8 @@ function AuthCallback() {
   const navigate = useNavigate();
   const location = useLocation();
 
+// Modified part of src/pages/AuthCallback.jsx - update the useEffect
+
   useEffect(() => {
     // Extract token and user info from URL parameters
     const params = new URLSearchParams(location.search);
@@ -19,14 +21,35 @@ function AuthCallback() {
       localStorage.setItem('userId', userId);
       localStorage.setItem('userName', name);
       localStorage.setItem('token', token);
-      
+
       // Set Authorization header for future API requests
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       }
 
-      // Redirect to home page
-      navigate('/home');
+      // Fetch user role
+      const fetchUserRole = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8080/user/getUserById?userId=${userId}`);
+          if (response.data && response.data.role) {
+            localStorage.setItem('userRole', response.data.role);
+
+            // Redirect based on role
+            if (response.data.role === 'ADMIN') {
+              navigate('/admin');
+            } else {
+              navigate('/home');
+            }
+          } else {
+            navigate('/home'); // Default to home if role not found
+          }
+        } catch (error) {
+          console.error('Failed to fetch user role:', error);
+          navigate('/home'); // Default to home on error
+        }
+      };
+
+      fetchUserRole();
     } else {
       // Handle authentication error
       console.error('Authentication failed: Missing token or user ID');

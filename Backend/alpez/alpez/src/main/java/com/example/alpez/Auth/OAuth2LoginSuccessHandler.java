@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.example.alpez.Entity.Role;
+import com.example.alpez.Entity.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -13,7 +14,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.example.alpez.Entity.UserEntity;
 import com.example.alpez.Repo.UserRepo;
 
 import jakarta.servlet.ServletException;

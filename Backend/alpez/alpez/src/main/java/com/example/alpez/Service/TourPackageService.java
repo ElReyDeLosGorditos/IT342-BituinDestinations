@@ -1,7 +1,11 @@
 package com.example.alpez.Service;
 
-import com.example.alpez.Entity.TourPackageEntity;
+import com.example.alpez.DTO.TourPackageDTO;
+import com.example.alpez.Entity.Destination;
+import com.example.alpez.Entity.TourPackage;
+import com.example.alpez.Repo.DestinationRepo;
 import com.example.alpez.Repo.TourPackageRepo;
+import com.example.alpez.mapper.TourPackageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,48 +16,68 @@ import java.util.Optional;
 public class TourPackageService {
 
     @Autowired
-    private TourPackageRepo packageRepo;
+    private TourPackageRepo tourPackageRepo;
 
-    // CREATE
-    public TourPackageEntity createTourPackage(TourPackageEntity tourPackage) {
-        return packageRepo.save(tourPackage);
-    }
+    @Autowired
+    private DestinationRepo destinationRepo;
 
-    // READ all
-    public List<TourPackageEntity> getAllTourPackages() {
-        return packageRepo.findAll();
-    }
+    @Autowired
+    private TourPackageMapper tourPackageMapper;
 
-    // READ one by ID
-    public Optional<TourPackageEntity> getTourPackageById(int id) {
-        return packageRepo.findById(id);
-    }
-
-    // UPDATE
-    public TourPackageEntity updateTourPackage(int id, TourPackageEntity updatedPackage) {
-        return packageRepo.findById(id).map(existing -> {
-            existing.setTitle(updatedPackage.getTitle());
-            existing.setDescription(updatedPackage.getDescription());
-            existing.setPrice(updatedPackage.getPrice());
-            existing.setDuration(updatedPackage.getDuration());
-            existing.setAvailableSlots(updatedPackage.getAvailableSlots());
-            existing.setCreatedAt(updatedPackage.getCreatedAt());
-            existing.setDestination(updatedPackage.getDestination());
-            return packageRepo.save(existing);
-        }).orElse(null);
-    }
-
-    // DELETE
-    public String deleteTourPackage(int id) {
-        if (packageRepo.existsById(id)) {
-            packageRepo.deleteById(id);
-            return "TourPackage deleted successfully.";
+    public TourPackageDTO saveTourPackage(TourPackageDTO tourPackageDTO) {
+        TourPackage tourPackage = tourPackageMapper.toEntity(tourPackageDTO);
+        
+        // Set the destination
+        Optional<Destination> destinationOpt = destinationRepo.findById(tourPackageDTO.getDestinationId());
+        if (destinationOpt.isPresent()) {
+            tourPackage.setDestination(destinationOpt.get());
+        } else {
+            throw new RuntimeException("Destination not found");
         }
-        return "TourPackage not found.";
+
+        TourPackage savedTourPackage = tourPackageRepo.save(tourPackage);
+        return tourPackageMapper.toDTO(savedTourPackage);
     }
 
-    
-    public List<TourPackageEntity> searchTourPackages(String keyword, String sortBy, String sortDir) {
-        return packageRepo.findAll(); 
+    public List<TourPackageDTO> getAllTourPackages() {
+        List<TourPackage> tourPackages = tourPackageRepo.findAll();
+        return tourPackageMapper.toDTOList(tourPackages);
     }
-}
+
+    public Optional<TourPackageDTO> getTourPackageById(Integer id) {
+        Optional<TourPackage> tourPackage = tourPackageRepo.findById(id);
+        return tourPackage.map(tourPackageMapper::toDTO);
+    }
+
+    public List<TourPackageDTO> getTourPackagesByDestinationId(Integer destinationId) {
+        List<TourPackage> tourPackages = tourPackageRepo.findByDestinationId(destinationId);
+        return tourPackageMapper.toDTOList(tourPackages);
+    }
+
+    public TourPackageDTO updateTourPackage(Integer id, TourPackageDTO tourPackageDTO) {
+        if (tourPackageRepo.existsById(id)) {
+            TourPackage tourPackage = tourPackageMapper.toEntity(tourPackageDTO);
+            tourPackage.setId(id);
+            
+            // Set the destination
+            Optional<Destination> destinationOpt = destinationRepo.findById(tourPackageDTO.getDestinationId());
+            if (destinationOpt.isPresent()) {
+                tourPackage.setDestination(destinationOpt.get());
+            } else {
+                throw new RuntimeException("Destination not found");
+            }
+
+            TourPackage updatedTourPackage = tourPackageRepo.save(tourPackage);
+            return tourPackageMapper.toDTO(updatedTourPackage);
+        }
+        return null;
+    }
+
+    public boolean deleteTourPackage(Integer id) {
+        if (tourPackageRepo.existsById(id)) {
+            tourPackageRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+} 

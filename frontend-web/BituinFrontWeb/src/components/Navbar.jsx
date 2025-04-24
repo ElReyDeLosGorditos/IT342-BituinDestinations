@@ -34,52 +34,62 @@ function Navbar() {
     navigate('/');
   };
 
-  return (
-    <nav className={`${navbarColor} ${navbarOpacity} shadow-lg fixed w-full z-50`}>
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="flex justify-between h-20">
-          <div className="flex items-center">
-            <Link to={isLoggedIn ? '/home' : '/'} className="text-2xl font-bold text-white">
-              Bituin Destinations
-            </Link>
-          </div>
+  // Modified part of src/components/Navbar.jsx - update the return statement
 
-          <div className="flex items-center space-x-8">
-            {isLoggedIn ? (
-              <>
-                <Link
-                  to="/profile"
-                  className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
-                >
-                  Profile
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
-                >
-                  Login
-                </Link>
-                <Link
-                  to="/signup"
-                  className="navbar-btn bg-transparent text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
-                >
-                  Sign Up
-                </Link>
-              </>
-            )}
+  return (
+      <nav className={`${navbarColor} ${navbarOpacity} shadow-lg fixed w-full z-50`}>
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex justify-between h-20">
+            <div className="flex items-center">
+              <Link to={isLoggedIn ? '/home' : '/'} className="text-2xl font-bold text-white">
+                Bituin Destinations
+              </Link>
+            </div>
+
+            <div className="flex items-center space-x-8">
+              {isLoggedIn ? (
+                  <>
+                    {localStorage.getItem('userRole') === 'ADMIN' && (
+                        <Link
+                            to="/admin"
+                            className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
+                        >
+                          Admin Dashboard
+                        </Link>
+                    )}
+                    <Link
+                        to="/profile"
+                        className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
+                    >
+                      Profile
+                    </Link>
+                    <button
+                        onClick={handleLogout}
+                        className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
+                    >
+                      Logout
+                    </button>
+                  </>
+              ) : (
+                  <>
+                    <Link
+                        to="/login"
+                        className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                        to="/signup"
+                        className="navbar-btn bg-transparent text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
   );
 }
 

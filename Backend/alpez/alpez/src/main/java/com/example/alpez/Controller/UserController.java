@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.example.alpez.Entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
 //import com.example.alpez.Auth.JwtUtil;
-import com.example.alpez.Entity.UserEntity;
 import com.example.alpez.Service.UserService;
 
 @RestController
@@ -43,7 +43,7 @@ public class UserController {
 
 
      @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user) {    
+    public ResponseEntity<Map<String, Object>> login(@RequestBody UserEntity user) {
         try {
             String authResult = userService.authenticateUser(user.getEmail(), user.getPassword());
             System.out.print("Logged in successfully with email: " + user.getEmail());

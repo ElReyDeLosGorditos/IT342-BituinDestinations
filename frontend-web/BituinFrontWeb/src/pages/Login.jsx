@@ -32,6 +32,8 @@ function Login() {
     }
   }, [location, navigate])
 
+  // Modified part of src/pages/Login.jsx - update the handleSubmit function
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
@@ -45,17 +47,27 @@ function Login() {
         // Store login status
         localStorage.setItem('isLoggedIn', 'true')
 
-        // Get user ID by email
+        // Get user ID and role by email
         const userResponse = await axios.get(`http://localhost:8080/user/getAll`)
         const users = userResponse.data
         const user = users.find(u => u.email === formData.email)
 
         if (user) {
           localStorage.setItem('userId', user.userId)
-        }
+          localStorage.setItem('userRole', user.role)
+          localStorage.setItem('userName', user.name)
 
-        // Redirect to home page
-        navigate('/home')
+          // Redirect based on role
+// Login.jsx handleSubmit function (relevant part)
+          if (user.role === 'ADMIN') {
+            navigate('/admin');
+          } else {
+            // User role - redirect to home which now shows DestinationBrowser
+            navigate('/home');
+          }
+        } else {
+          navigate('/home')
+        }
       } else {
         setError('Invalid email or password. Please try again.')
       }

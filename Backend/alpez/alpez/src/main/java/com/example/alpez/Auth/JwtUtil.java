@@ -5,13 +5,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.alpez.Entity.UserEntity;
 import jakarta.annotation.PostConstruct;
 
 
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
-
-import com.example.alpez.Entity.UserEntity;
 
 import com.example.alpez.config.EnvConfig;
 import io.jsonwebtoken.Claims;

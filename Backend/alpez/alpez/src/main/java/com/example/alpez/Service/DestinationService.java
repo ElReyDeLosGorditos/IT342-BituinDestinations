@@ -1,49 +1,55 @@
+// DestinationService.java
 package com.example.alpez.Service;
 
-import com.example.alpez.Entity.DestinationEntity;
+import com.example.alpez.DTO.DestinationDTO;
+import com.example.alpez.Entity.Destination;
 import com.example.alpez.Repo.DestinationRepo;
+import com.example.alpez.mapper.DestinationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DestinationService {
 
     @Autowired
-    private DestinationRepo destinationRepository;
+    private DestinationRepo destinationRepo;
 
-    // Create
-    public DestinationEntity createDestination(DestinationEntity destination) {
-        return destinationRepository.save(destination);
+    @Autowired
+    private DestinationMapper destinationMapper;
+
+    public DestinationDTO saveDestination(DestinationDTO destinationDTO) {
+        Destination destination = destinationMapper.toEntity(destinationDTO);
+        Destination savedDestination = destinationRepo.save(destination);
+        return destinationMapper.toDTO(savedDestination);
     }
 
-    // Read all
-    public List<DestinationEntity> getAllDestinations() {
-        return destinationRepository.findAll();
+    public List<DestinationDTO> getAllDestinations() {
+        List<Destination> destinations = destinationRepo.findAll();
+        return destinationMapper.toDTOList(destinations);
     }
 
-    // Read by ID
-    public Optional<DestinationEntity> getDestinationById(Long id) {
-        return destinationRepository.findById(id);
+    public Optional<DestinationDTO> getDestinationById(Integer id) {
+        Optional<Destination> destination = destinationRepo.findById(id);
+        return destination.map(destinationMapper::toDTO);
     }
 
-    // Update
-    public DestinationEntity updateDestination(Long id, DestinationEntity updated) {
-        return destinationRepository.findById(id).map(existing -> {
-            existing.setDestinationName(updated.getDestinationName());
-            existing.setDestinationDescription(updated.getDestinationDescription());
-            existing.setDestinationType(updated.getDestinationType());
-            existing.setRegion(updated.getRegion());
-            return destinationRepository.save(existing);
-        }).orElse(null);
+    public DestinationDTO updateDestination(Integer id, DestinationDTO destinationDTO) {
+        if (destinationRepo.existsById(id)) {
+            Destination destination = destinationMapper.toEntity(destinationDTO);
+            destination.setId(id);
+            Destination updatedDestination = destinationRepo.save(destination);
+            return destinationMapper.toDTO(updatedDestination);
+        }
+        return null;
     }
 
-    // Delete
-    public boolean deleteDestination(Long id) {
-        if (destinationRepository.existsById(id)) {
-            destinationRepository.deleteById(id);
+    public boolean deleteDestination(Integer id) {
+        if (destinationRepo.existsById(id)) {
+            destinationRepo.deleteById(id);
             return true;
         }
         return false;

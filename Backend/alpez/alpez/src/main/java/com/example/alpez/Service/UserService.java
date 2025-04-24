@@ -4,12 +4,12 @@ package com.example.alpez.Service;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.alpez.Entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.alpez.Entity.Role;
 //import com.example.alpez.Auth.JwtUtil;
-import com.example.alpez.Entity.UserEntity;
 import com.example.alpez.Repo.UserRepo;
 
 

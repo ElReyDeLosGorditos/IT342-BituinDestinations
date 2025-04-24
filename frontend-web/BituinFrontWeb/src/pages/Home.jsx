@@ -1,210 +1,130 @@
-// import { useState, useEffect } from 'react'
-//
-// function Home() {
-//   const [tourPackages, setTourPackages] = useState([])
-//   const [loading, setLoading] = useState(true)
-//
-//   useEffect(() => {
-//     // TODO: Fetch tour packages from backend
-//     // This is a placeholder for demonstration
-//     const fetchTourPackages = async () => {
-//       try {
-//         // Replace with actual API call
-//         const response = await fetch('http://localhost:8080/api/tourpackages')
-//         const data = await response.json()
-//         setTourPackages(data)
-//       } catch (error) {
-//         console.error('Error fetching tour packages:', error)
-//       } finally {
-//         setLoading(false)
-//       }
-//     }
-//
-//     fetchTourPackages()
-//   }, [])
-//
-//   if (loading) {
-//     return (
-//       <div className="min-h-screen flex items-center justify-center pt-16">
-//         <div className="text-2xl text-gray-600">Loading...</div>
-//       </div>
-//     )
-//   }
-//
-//   return (
-//     <div className="min-h-screen bg-gray-50 pt-16">
-//       <div className="max-w-7xl mx-auto px-8 py-16">
-//         <div className="flex justify-between items-center mb-16">
-//           <h1 className="text-5xl font-bold text-gray-900">Tour Packages</h1>
-//           <div className="flex space-x-6">
-//             <select className="border-2 border-gray-300 rounded-xl px-6 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-//               <option value="">Sort by</option>
-//               <option value="price-low">Price: Low to High</option>
-//               <option value="price-high">Price: High to Low</option>
-//               <option value="duration">Duration</option>
-//             </select>
-//             <input
-//               type="text"
-//               placeholder="Search destinations..."
-//               className="border-2 border-gray-300 rounded-xl px-6 py-3 text-lg w-80 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-//             />
-//           </div>
-//         </div>
-//
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-//           {tourPackages.map((tourPackage) => (
-//             <div
-//               key={tourPackage.packageId}
-//               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-//             >
-//               {tourPackage.imageUrl && (
-//                 <div className="relative h-80">
-//                   <img
-//                     src={tourPackage.imageUrl}
-//                     alt={tourPackage.name}
-//                     className="w-full h-full object-cover"
-//                   />
-//                   <div className="absolute top-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-xl text-lg font-medium">
-//                     {tourPackage.duration}
-//                   </div>
-//                 </div>
-//               )}
-//               <div className="p-8">
-//                 <h2 className="text-3xl font-semibold text-gray-900 mb-4">
-//                   {tourPackage.name}
-//                 </h2>
-//                 <p className="text-xl text-gray-600 mb-6 flex items-center">
-//                   <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-//                   </svg>
-//                   {tourPackage.location}
-//                 </p>
-//                 <div className="flex justify-between items-center">
-//                   <p className="text-3xl font-bold text-blue-600">
-//                     ${tourPackage.price}
-//                   </p>
-//                   <button className="bg-blue-600 text-white px-8 py-3 rounded-xl text-lg font-medium hover:bg-blue-700 transition-colors">
-//                     Book Now
-//                   </button>
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-//
-// export default Home
-
-
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Home() {
-  const [tourPackages, setTourPackages] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [keyword, setKeyword] = useState('')
-  const [sortBy, setSortBy] = useState('')
-  const [sortDir, setSortDir] = useState('asc')
+  const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [selectedType, setSelectedType] = useState('ALL');
+  const [selectedRegion, setSelectedRegion] = useState('ALL');
+
+  const destinationTypes = ['ALL', 'BEACH', 'MOUNTAIN', 'HISTORICAL', 'CULTURAL', 'NATURE', 'URBAN'];
+  const regions = [
+    'ALL', 'NCR', 'CAR', 'REGION_1', 'REGION_2', 'REGION_3', 'REGION_4A',
+    'REGION_4B', 'REGION_5', 'REGION_6', 'REGION_7', 'REGION_8',
+    'REGION_9', 'REGION_10', 'REGION_11', 'REGION_12', 'REGION_13'
+  ];
 
   useEffect(() => {
-    const fetchTourPackages = async () => {
-      setLoading(true)
-      try {
-        const query = new URLSearchParams()
-        if (keyword) query.append('keyword', keyword)
-        if (sortBy) {
-          query.append('sortBy', sortBy)
-          query.append('sortDir', sortDir)
-        }
+    fetchDestinations();
+  }, []);
 
-        const response = await fetch(`http://localhost:8080/tourpackage/search?${query}`)
-        const data = await response.json()
-        setTourPackages(data)
-      } catch (error) {
-        console.error('Error fetching tour packages:', error)
-      } finally {
-        setLoading(false)
-      }
+  const fetchDestinations = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get('http://localhost:8080/destination/getAll');
+      setDestinations(response.data);
+    } catch (err) {
+      setError('Failed to load destinations');
+      console.error('Error fetching destinations:', err);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    fetchTourPackages()
-  }, [keyword, sortBy, sortDir])
+  const filteredDestinations = destinations.filter(destination => {
+    if (selectedType !== 'ALL' && destination.destinationType !== selectedType) return false;
+    if (selectedRegion !== 'ALL' && destination.region !== selectedRegion) return false;
+    return true;
+  });
 
   if (loading) {
     return (
-        <div className="min-h-screen flex items-center justify-center pt-16">
-          <div className="text-2xl text-gray-600">Loading...</div>
+        <div className="min-h-screen pt-16 flex items-center justify-center">
+          <div className="text-2xl text-gray-600">Loading destinations...</div>
         </div>
-    )
+    );
   }
 
   return (
-      <div className="min-h-screen bg-gray-50 pt-16">
-        <div className="max-w-7xl mx-auto px-8 py-16">
-          <div className="flex justify-between items-center mb-16">
-            <h1 className="text-5xl font-bold text-gray-900">Tour Packages</h1>
-            <div className="flex space-x-6">
-              <select
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="border-2 border-gray-300 rounded-xl px-6 py-3 text-lg"
-              >
-                <option value="">Sort by</option>
-                <option value="price">Price</option>
-                <option value="duration">Duration</option>
-              </select>
-              <select
-                  onChange={(e) => setSortDir(e.target.value)}
-                  className="border-2 border-gray-300 rounded-xl px-6 py-3 text-lg"
-              >
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-              </select>
-              <input
-                  type="text"
-                  placeholder="Search destinations..."
-                  value={keyword}
-                  onChange={(e) => setKeyword(e.target.value)}
-                  className="border-2 border-gray-300 rounded-xl px-6 py-3 text-lg w-80"
-              />
-            </div>
+      <div className="min-h-screen pt-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-8">Popular Destinations</h1>
+
+          {error && (
+              <div className="mb-8 p-4 bg-red-100 text-red-700 rounded-lg">
+                {error}
+              </div>
+          )}
+
+          <div className="flex flex-col md:flex-row gap-4 mb-8">
+            <select
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                className="p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              {destinationTypes.map(type => (
+                  <option key={type} value={type}>{type}</option>
+              ))}
+            </select>
+
+            <select
+                value={selectedRegion}
+                onChange={(e) => setSelectedRegion(e.target.value)}
+                className="p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              {regions.map(region => (
+                  <option key={region} value={region}>{region}</option>
+              ))}
+            </select>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {tourPackages.map((tourPackage) => (
-                <div key={tourPackage.packageId} className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                  {tourPackage.imageUrl && (
-                      <div className="relative h-80">
-                        <img src={tourPackage.imageUrl} alt={tourPackage.name} className="w-full h-full object-cover" />
-                        <div className="absolute top-6 right-6 bg-black text-white px-4 py-2 rounded-xl text-lg font-medium">
-                          {tourPackage.duration}
-                        </div>
-                      </div>
-                  )}
-                  <div className="p-8">
-                    <h2 className="text-3xl font-semibold text-gray-900 mb-4">{tourPackage.name}</h2>
-                    <p className="text-xl text-gray-600 mb-6 flex items-center">
-                      <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredDestinations.map(destination => (
+                <div key={destination.id} className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                  <img
+                      src={destination.destinationImage ? `http://localhost:8080/files/${destination.destinationImage}` : '/images/placeholder.jpg'}
+                      alt={destination.destinationName}
+                      className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                      {destination.destinationName}
+                    </h2>
+                    <div className="flex items-center gap-2 mb-4">
+                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                    {destination.destinationType}
+                  </span>
+                      <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                    {destination.region}
+                  </span>
+                    </div>
+                    <p className="text-gray-600 mb-4 line-clamp-3">
+                      {destination.destinationDescription}
+                    </p>
+                    <div className="flex items-center text-gray-500">
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
-                      {tourPackage.location}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <p className="text-3xl font-bold text-white-600">Php {tourPackage.price}</p>
-                      <button className="bg-black text-white px-8 py-3 rounded-xl text-lg font-medium hover:bg-grey transition-colors">
-                        Book Now
-                      </button>
+                      {destination.destinationLocation}
                     </div>
                   </div>
                 </div>
             ))}
           </div>
+
+          {filteredDestinations.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-xl text-gray-600">
+                  No destinations found matching your filters.
+                </p>
+              </div>
+          )}
         </div>
       </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

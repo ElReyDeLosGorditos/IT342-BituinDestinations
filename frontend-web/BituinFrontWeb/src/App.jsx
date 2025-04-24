@@ -1,28 +1,65 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import Landing from './pages/Landing'
-import Profile from './pages/Profile'
-import AuthCallback from './pages/AuthCallback'
+// App.jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Landing from './pages/Landing';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Profile from './pages/Profile';
+import AuthCallback from './pages/AuthCallback';
+import AdminDashboard from './pages/AdminDashboard';
+import Unauthorized from './pages/Unauthorized';
+import ProtectedRoute from './components/ProtectedRoute';
+import PublicRoute from './components/PublicRoute';
+import DestinationBrowser from './pages/DestinationBrowser';
+import TourPackageDetails from './pages/TourPackageDetails';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-100">
+      <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={
+            <PublicRoute>
+              <Landing />
+            </PublicRoute>
+          } />
+          <Route path="/login" element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          } />
+          <Route path="/signup" element={
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          } />
           <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+
+          {/* Protected routes */}
+          <Route path="/home" element={
+            <ProtectedRoute>
+              <DestinationBrowser />
+            </ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin" element={
+            <ProtectedRoute requiredRole="ADMIN">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/tour-package/:id" element={
+            <ProtectedRoute>
+              <TourPackageDetails />
+            </ProtectedRoute>
+          } />
         </Routes>
-      </div>
-    </Router>
-  )
+      </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
