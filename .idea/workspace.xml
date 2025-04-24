@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="here we go again">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/DestinationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/DestinationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="Debuging" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
