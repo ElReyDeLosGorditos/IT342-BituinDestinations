@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -119,14 +120,25 @@ public class DestinationController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteDestination(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteDestination(@PathVariable Integer id) {
         try {
-            if (destinationService.deleteDestination(id)) {
-                return new ResponseEntity<>(HttpStatus.OK);
+            boolean deleted = destinationService.deleteDestination(id);
+            if (deleted) {
+                return ResponseEntity.ok().body(Map.of(
+                    "success", true,
+                    "message", "Destination deleted successfully"
+                ));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                    "success", false,
+                    "message", "Destination not found"
+                ));
             }
-            throw new RuntimeException("Destination not found");
         } catch (Exception e) {
-            throw new RuntimeException("Error deleting destination: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                "success", false,
+                "message", "Error deleting destination: " + e.getMessage()
+            ));
         }
     }
 }

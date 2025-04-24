@@ -64,6 +64,7 @@ public class ReviewService {
                 review.getComment(),
                 review.getReviewDate(),
                 review.getUser().getUserId(),
+                review.getUser().getName(),
                 review.getTourPackage().getId()
         );
     }

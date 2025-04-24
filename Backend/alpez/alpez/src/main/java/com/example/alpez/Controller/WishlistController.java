@@ -2,6 +2,7 @@ package com.example.alpez.Controller;
 
 import com.example.alpez.DTO.WishlistDTO;
 import com.example.alpez.Service.WishlistService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,14 @@ public class WishlistController {
     public ResponseEntity<Void> removeFromWishlist(
             @RequestParam Integer userId,
             @RequestParam Integer tourPackageId) {
-        wishlistService.removeFromWishlist(userId, tourPackageId);
-        return ResponseEntity.noContent().build();
+        try {
+            wishlistService.removeFromWishlist(userId, tourPackageId);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            // Log the exception
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 }

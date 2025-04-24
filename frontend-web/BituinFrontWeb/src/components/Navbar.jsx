@@ -49,12 +49,19 @@ function Navbar() {
             <div className="flex items-center space-x-8">
               {isLoggedIn ? (
                   <>
-                    {localStorage.getItem('userRole') === 'ADMIN' && (
+                    {localStorage.getItem('userRole') === 'ADMIN' ? (
                         <Link
                             to="/admin"
                             className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
                         >
                           Admin Dashboard
+                        </Link>
+                    ) : (
+                        <Link
+                            to="/wishlist"
+                            className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
+                        >
+                          Wishlist
                         </Link>
                     )}
                     <Link

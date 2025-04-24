@@ -8,16 +8,18 @@ public class ReviewDTO {
     private String comment;
     private LocalDateTime reviewDate;
     private Integer userId;         // ← Changed from Long to Integer
+    private String userName;
     private Integer tourPackageId;
 
     public ReviewDTO() {}
 
-    public ReviewDTO(Long id, Integer rating, String comment, LocalDateTime reviewDate, Integer userId, Integer tourPackageId) {
+    public ReviewDTO(Long id, Integer rating, String comment, LocalDateTime reviewDate, Integer userId, String userName, Integer tourPackageId) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
         this.reviewDate = reviewDate;
         this.userId = userId;
+        this.userName = userName;
         this.tourPackageId = tourPackageId;
     }
 
@@ -36,6 +38,9 @@ public class ReviewDTO {
 
     public Integer getUserId() { return userId; }
     public void setUserId(Integer userId) { this.userId = userId; }
+
+    public String getUserName() { return userName; }
+    public void setUserName(String userName) { this.userName = userName; }
 
     public Integer getTourPackageId() { return tourPackageId; }
     public void setTourPackageId(Integer tourPackageId) { this.tourPackageId = tourPackageId; }

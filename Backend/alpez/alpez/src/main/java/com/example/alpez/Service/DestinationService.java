@@ -3,7 +3,9 @@ package com.example.alpez.Service;
 
 import com.example.alpez.DTO.DestinationDTO;
 import com.example.alpez.Entity.Destination;
+import com.example.alpez.Entity.TourPackage;
 import com.example.alpez.Repo.DestinationRepo;
+import com.example.alpez.Repo.TourPackageRepo;
 import com.example.alpez.mapper.DestinationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class DestinationService {
 
     @Autowired
     private DestinationRepo destinationRepo;
+
+    @Autowired
+    private TourPackageRepo tourPackageRepo;
 
     @Autowired
     private DestinationMapper destinationMapper;
@@ -48,10 +53,23 @@ public class DestinationService {
     }
 
     public boolean deleteDestination(Integer id) {
-        if (destinationRepo.existsById(id)) {
+        try {
+            // First check if the destination exists
+            if (!destinationRepo.existsById(id)) {
+                return false;
+            }
+
+            // Delete all associated tour packages first
+            List<TourPackage> associatedPackages = tourPackageRepo.findByDestinationId(id);
+            for (TourPackage tourPackage : associatedPackages) {
+                tourPackageRepo.deleteById(tourPackage.getId());
+            }
+
+            // Now delete the destination
             destinationRepo.deleteById(id);
             return true;
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting destination: " + e.getMessage());
         }
-        return false;
     }
 }

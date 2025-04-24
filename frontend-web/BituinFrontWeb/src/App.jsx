@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
 import DestinationBrowser from './pages/DestinationBrowser';
 import TourPackageDetails from './pages/TourPackageDetails';
+import Wishlist from './pages/Wishlist';
 
 function App() {
   return (
@@ -55,6 +56,11 @@ function App() {
           <Route path="/tour-package/:id" element={
             <ProtectedRoute>
               <TourPackageDetails />
+            </ProtectedRoute>
+          } />
+          <Route path="/wishlist" element={
+            <ProtectedRoute requiredRole="USER">
+              <Wishlist />
             </ProtectedRoute>
           } />
         </Routes>
