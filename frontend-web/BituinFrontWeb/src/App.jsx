@@ -1,22 +1,22 @@
 // App.jsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Landing from './pages/Landing';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Profile from './pages/Profile';
+import Landing from './components/Landing.jsx';
+import Login from './components/Login.jsx';
+import Signup from './components/Signup.jsx';
+import Profile from './components/Profile.jsx';
 import AuthCallback from './pages/AuthCallback';
-import AdminDashboard from './pages/AdminDashboard';
-import Unauthorized from './pages/Unauthorized';
+import AdminDashboard from './pages/admin/AdminDashboard.jsx';
+import Unauthorized from './components/Unauthorized.jsx';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
-import DestinationBrowser from './pages/DestinationBrowser';
-import TourPackageDetails from './pages/TourPackageDetails';
-import Wishlist from './pages/Wishlist';
-import BookingConfirmation from './pages/BookingConfirmation';
-import MyBookings from './pages/MyBookings';
-import PaymentConfirmation from './pages/PaymentConfirmation';
-import BookingReceipt from './pages/BookingReceipt';
+import DestinationBrowser from './pages/user/DestinationBrowser.jsx';
+import TourPackageDetails from './pages/user/TourPackageDetails.jsx';
+import Wishlist from './pages/user/Wishlist.jsx';
+import BookingConfirmation from './pages/user/BookingConfirmation.jsx';
+import MyBookings from './pages/user/MyBookings.jsx';
+import PaymentConfirmation from './pages/user/PaymentConfirmation.jsx';
+import BookingReceipt from './pages/user/BookingReceipt.jsx';
 
 function App() {
   return (

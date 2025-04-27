@@ -5,6 +5,9 @@ import com.example.alpez.Entity.Booking;
 import com.example.alpez.Repo.BookingRepo;
 import com.example.alpez.Repo.TourPackageRepo;
 import com.example.alpez.Repo.UserRepo;
+import com.example.alpez.Repo.PaymentRepo;
+import com.example.alpez.Entity.Payment;
+import com.example.alpez.Entity.TourPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,9 @@ public class BookingService {
 
     @Autowired
     private TourPackageRepo tourPackageRepo;
+
+    @Autowired
+    private PaymentRepo paymentRepo;
 
     public Booking createBooking(BookingDTO dto) {
         Booking booking = new Booking();
@@ -47,8 +53,31 @@ public class BookingService {
         return bookingRepo.findById(id);
     }
 
-    public void deleteBooking(Long id) {
+    public boolean deleteBooking(Long id) {
+        Optional<Booking> bookingOpt = bookingRepo.findById(id);
+        if (bookingOpt.isEmpty()) {
+            return false;
+        }
+        Booking booking = bookingOpt.get();
+        // Check if payment exists and is PAID
+        Optional<Payment> paymentOpt = paymentRepo.findByBookingId(id);
+        if (paymentOpt.isPresent()) {
+            Payment payment = paymentOpt.get();
+            if (payment.getPaymentStatus() != null && payment.getPaymentStatus().equalsIgnoreCase("PAID")) {
+                // Booking is already paid, do not allow deletion
+                return false;
+            }
+            // If payment exists but is not paid, delete it first
+            paymentRepo.delete(payment);
+        }
+        // Update available slots in the tour package
+        TourPackage tourPackage = booking.getTourPackage();
+        if (tourPackage != null) {
+            tourPackage.setAvailableSlots(tourPackage.getAvailableSlots() + booking.getNumOfTravelers());
+            tourPackageRepo.save(tourPackage);
+        }
         bookingRepo.deleteById(id);
+        return true;
     }
 
     public Booking updateBookingStatus(Long id, String newStatus) {

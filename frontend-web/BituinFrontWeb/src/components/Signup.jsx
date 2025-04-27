@@ -154,7 +154,7 @@ function Signup() {
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-4 px-6 border border-transparent rounded-xl shadow-xl text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out"
+                  className="w-full flex justify-center py-4 px-6 border border-transparent rounded-xl shadow-xl text-lg font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-4 focus:ring-amber-500 focus:ring-opacity-50 transition duration-300 ease-in-out"
                 >
                   Create Account
                 </button>
@@ -163,7 +163,7 @@ function Signup() {
             <div className="mt-8 text-center">
               <p className="text-lg text-gray-600">
                 Already have an account?{' '}
-                <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
+                <Link to="/login" className="font-medium text-amber-600 hover:text-amber-700">
                   Sign in
                 </Link>
               </p>
