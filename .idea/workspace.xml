@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="push">
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinDestinations" beforeDir="false" />
-    </list>
+    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="push" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,7 +107,7 @@
       <workItem from="1745728150376" duration="2086000" />
       <workItem from="1745739292925" duration="35000" />
       <workItem from="1745772881626" duration="200000" />
-      <workItem from="1745773104461" duration="1106000" />
+      <workItem from="1745773104461" duration="1421000" />
     </task>
     <task id="LOCAL-00001" summary="here we go again">
       <option name="closed" value="true" />
@@ -151,7 +149,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745774168835</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="push">
+      <option name="closed" value="true" />
+      <created>1745774226150</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745774226150</updated>
+    </task>
+    <task id="LOCAL-00007" summary="push">
+      <option name="closed" value="true" />
+      <created>1745774230526</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1745774230526</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
