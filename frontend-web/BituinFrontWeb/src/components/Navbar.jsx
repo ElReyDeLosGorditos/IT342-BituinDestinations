@@ -38,77 +38,72 @@ function Navbar() {
   };
 
   return (
-      <nav className={`${navbarColor} ${navbarOpacity} shadow-lg fixed w-full z-50`}>
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="flex justify-between h-20">
-            <div className="flex items-center">
-              <Link 
-                to={isLoggedIn ? (isAdmin ? '/admin' : '/home') : '/'} 
-                className="text-2xl font-bold text-white"
-              >
-                Bituin Destinations
-              </Link>
-            </div>
+    <nav className={`${navbarColor} ${navbarOpacity} shadow-lg fixed w-full z-50 backdrop-blur-sm`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-20">
+          <div className="flex items-center">
+            <Link 
+              to={isLoggedIn ? (isAdmin ? '/admin' : '/home') : '/'}
+              className="text-2xl font-bold text-white hover:text-amber-400 transition-colors duration-300"
+            >
+              Bituin Destinations
+            </Link>
+          </div>
 
-            <div className="flex items-center space-x-8">
-              {isLoggedIn ? (
-                  <>
-                    {isAdmin ? (
-                        <Link
-                            to="/admin"
-                            className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
-                        >
-                            Admin Dashboard
-                        </Link>
-                    ) : (
-                        <>
-                            <Link
-                                to="/wishlist"
-                                className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
-                            >
-                                Wishlist
-                            </Link>
-                            <Link
-                                to="/my-bookings"
-                                className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
-                            >
-                                My Bookings
-                            </Link>
-                        </>
-                    )}
+          <div className="flex items-center space-x-4">
+            {isLoggedIn ? (
+              <>
+                {!isAdmin && (
+                  <div className="hidden md:flex items-center space-x-4">
                     <Link
-                        to="/profile"
-                        className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
+                      to="/wishlist"
+                      className="text-white hover:text-amber-400 px-4 py-2 rounded-lg font-medium transition-colors duration-300"
                     >
-                        Profile
-                    </Link>
-                    <button
-                        onClick={handleLogout}
-                        className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
-                    >
-                        Logout
-                    </button>
-                  </>
-              ) : (
-                  <>
-                    <Link
-                        to="/login"
-                        className="navbar-btn text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
-                    >
-                        Login
+                      Wishlist
                     </Link>
                     <Link
-                        to="/signup"
-                        className="navbar-btn bg-transparent text-white px-6 py-2 rounded-xl font-medium hover:bg-transparent hover:text-white transition-colors"
+                      to="/my-bookings"
+                      className="text-white hover:text-amber-400 px-4 py-2 rounded-lg font-medium transition-colors duration-300"
                     >
-                        Sign Up
+                      My Bookings
                     </Link>
-                  </>
-              )}
-            </div>
+                  </div>
+                )}
+                <div className="flex items-center space-x-4">
+                  <Link
+                    to="/profile"
+                    className="text-white hover:text-amber-400 px-4 py-2 rounded-lg font-medium transition-colors duration-300"
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="flex items-center space-x-4">
+                <Link
+                  to="/login"
+                  className="text-white hover:text-amber-400 px-4 py-2 rounded-lg font-medium transition-colors duration-300"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="bg-amber-600 hover:bg-amber-700 text-white hover:text-amber-100 px-4 py-2 rounded-lg font-medium transition-colors duration-300"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
   );
 }
 
