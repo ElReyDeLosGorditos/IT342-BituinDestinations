@@ -6,8 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="review wishlist frontend web">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/OAuth2LoginSuccessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/OAuth2LoginSuccessHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/DTO/DestinationUpdateRequestDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Entity/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Entity/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/DestinationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/DestinationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/AdminDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/AdminDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/TourPackageDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/TourPackageDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/TourPackagesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/TourPackagesList.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,26 +56,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;function&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kyle Inion/Desktop/now/IT342-BituinDestinations&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "function",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/b. Bituin Destinations/IT342-BituinDestinations",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Service" />
@@ -110,9 +121,6 @@
       <workItem from="1745680145813" duration="4178000" />
       <workItem from="1745728150376" duration="2086000" />
       <workItem from="1745739292925" duration="35000" />
-      <workItem from="1745749775559" duration="259000" />
-      <workItem from="1745750137087" duration="144000" />
-      <workItem from="1745755131265" duration="32000" />
     </task>
     <task id="LOCAL-00001" summary="here we go again">
       <option name="closed" value="true" />
