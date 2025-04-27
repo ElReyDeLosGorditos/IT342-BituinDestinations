@@ -13,12 +13,17 @@ import PublicRoute from './components/PublicRoute';
 import DestinationBrowser from './pages/DestinationBrowser';
 import TourPackageDetails from './pages/TourPackageDetails';
 import Wishlist from './pages/Wishlist';
+import BookingConfirmation from './pages/BookingConfirmation';
+import MyBookings from './pages/MyBookings';
+import PaymentConfirmation from './pages/PaymentConfirmation';
+import BookingReceipt from './pages/BookingReceipt';
 
 function App() {
   return (
       <BrowserRouter>
         <Navbar />
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={
             <PublicRoute>
               <Landing />
@@ -37,9 +42,9 @@ function App() {
           <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
 
-          {/* Protected routes */}
+          {/* User Routes */}
           <Route path="/home" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiredRole="USER">
               <DestinationBrowser />
             </ProtectedRoute>
           } />
@@ -48,19 +53,66 @@ function App() {
               <Profile />
             </ProtectedRoute>
           } />
-          <Route path="/admin" element={
-            <ProtectedRoute requiredRole="ADMIN">
-              <AdminDashboard />
-            </ProtectedRoute>
-          } />
           <Route path="/tour-package/:id" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiredRole="USER">
               <TourPackageDetails />
             </ProtectedRoute>
           } />
           <Route path="/wishlist" element={
             <ProtectedRoute requiredRole="USER">
               <Wishlist />
+            </ProtectedRoute>
+          } />
+          <Route path="/booking-confirmation/:bookingId" element={
+            <ProtectedRoute requiredRole="USER">
+              <BookingConfirmation />
+            </ProtectedRoute>
+          } />
+          <Route path="/my-bookings" element={
+            <ProtectedRoute requiredRole="USER">
+              <MyBookings />
+            </ProtectedRoute>
+          } />
+          <Route path="/payment-confirmation/:bookingId" element={
+            <ProtectedRoute requiredRole="USER">
+              <PaymentConfirmation />
+            </ProtectedRoute>
+          } />
+          <Route path="/booking-receipt/:bookingId" element={
+            <ProtectedRoute requiredRole="USER">
+              <BookingReceipt />
+            </ProtectedRoute>
+          } />
+
+          {/* Admin Routes */}
+          <Route path="/admin" element={
+            <ProtectedRoute requiredRole="ADMIN">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/users" element={
+            <ProtectedRoute requiredRole="ADMIN">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/destinations" element={
+            <ProtectedRoute requiredRole="ADMIN">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/tour-packages" element={
+            <ProtectedRoute requiredRole="ADMIN">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/bookings" element={
+            <ProtectedRoute requiredRole="ADMIN">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin/reviews" element={
+            <ProtectedRoute requiredRole="ADMIN">
+              <AdminDashboard />
             </ProtectedRoute>
           } />
         </Routes>

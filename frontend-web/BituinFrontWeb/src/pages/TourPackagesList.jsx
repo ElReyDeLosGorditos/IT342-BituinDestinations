@@ -1,7 +1,30 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function TourPackagesList({ destinationId }) {
+    const [showPaymentFor, setShowPaymentFor] = useState(null);
+    const [bookingId, setBookingId] = useState(null);
+    const [bookingLoadingId, setBookingLoadingId] = useState(null);
+
+    const handleBookNow = async (pkg) => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            alert('You must be logged in to book a package.');
+            return;
+        }
+        setBookingLoadingId(pkg.id);
+        try {
+            const response = await axios.post('http://localhost:8080/booking/create', {
+                userId,
+                packageId: pkg.id
+            });
+            setBookingId(response.data.bookingId);
+            setShowPaymentFor(pkg.id);
+        } catch (error) {
+            alert(error.response?.data?.message || 'Booking failed. Please try again.');
+        } finally {
+            setBookingLoadingId(null);
+        }
+    };
     const [packages, setPackages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -77,9 +100,21 @@ function TourPackagesList({ destinationId }) {
                         <div className="text-gray-500">
                             {new Date(pkg.startDate).toLocaleDateString()} - {new Date(pkg.endDate).toLocaleDateString()}
                         </div>
-                        <button className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
-                            Book Now
-                        </button>
+                        {showPaymentFor === pkg.id ? (
+                            <Payment
+                                bookingId={bookingId}
+                                amount={pkg.price}
+                                onPaymentSuccess={() => setShowPaymentFor(null)}
+                            />
+                        ) : (
+                            <button
+                                className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+                                onClick={() => handleBookNow(pkg)}
+                                disabled={bookingLoadingId === pkg.id}
+                            >
+                                {bookingLoadingId === pkg.id ? 'Processing...' : 'Book Now'}
+                            </button>
+                        )}
                     </div>
                 </div>
             ))}

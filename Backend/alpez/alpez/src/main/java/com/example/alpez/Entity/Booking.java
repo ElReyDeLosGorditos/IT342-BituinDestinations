@@ -25,9 +25,6 @@ public class Booking {
     private String paymentMethod;
 
     @Column(nullable = false)
-    private String paymentStatus;
-
-    @Column(nullable = false)
     private String bookingStatus;
 
     @CreationTimestamp
@@ -48,12 +45,11 @@ public class Booking {
     public Booking() {}
 
     public Booking(LocalDate travelDate, Integer numOfTravelers, Double totalPrice, String paymentMethod,
-                   String paymentStatus, String bookingStatus, UserEntity user, TourPackage tourPackage) {
+                   String bookingStatus, UserEntity user, TourPackage tourPackage) {
         this.travelDate = travelDate;
         this.numOfTravelers = numOfTravelers;
         this.totalPrice = totalPrice;
         this.paymentMethod = paymentMethod;
-        this.paymentStatus = paymentStatus;
         this.bookingStatus = bookingStatus;
         this.user = user;
         this.tourPackage = tourPackage;
@@ -95,14 +91,6 @@ public class Booking {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
     public String getBookingStatus() {
         return bookingStatus;
     }
@@ -115,7 +103,6 @@ public class Booking {
         return createdAt;
     }
 
-    // Optional setter in case you need to mock `createdAt` in tests
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
@@ -156,7 +143,6 @@ public class Booking {
                 ", numOfTravelers=" + numOfTravelers +
                 ", totalPrice=" + totalPrice +
                 ", paymentMethod='" + paymentMethod + '\'' +
-                ", paymentStatus='" + paymentStatus + '\'' +
                 ", bookingStatus='" + bookingStatus + '\'' +
                 ", createdAt=" + createdAt +
                 ", user=" + (user != null ? user.getUserId() : null) +

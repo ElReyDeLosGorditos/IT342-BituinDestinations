@@ -5,6 +5,7 @@ import UserManagement from '../components/UserManagement';
 import DestinationManagement from '../components/DestinationManagement';
 import TourPackageManagement from '../components/TourPackageManagement';
 import ReviewManagement from '../components/ReviewManagement';
+import AdminBookingManagement from './AdminBookingManagement';
 
 function AdminDashboard() {
     const [activeTab, setActiveTab] = useState('users');
@@ -13,6 +14,7 @@ function AdminDashboard() {
         { id: 'users', label: 'Users' },
         { id: 'destinations', label: 'Destinations' },
         { id: 'tourPackages', label: 'Tour Packages' },
+        { id: 'bookings', label: 'Bookings' },
         { id: 'reviews', label: 'Reviews' }
     ];
 
@@ -24,6 +26,8 @@ function AdminDashboard() {
                 return <DestinationManagement />;
             case 'tourPackages':
                 return <TourPackageManagement />;
+            case 'bookings':
+                return <AdminBookingManagement />;
             case 'reviews':
                 return <ReviewManagement />;
             default:
