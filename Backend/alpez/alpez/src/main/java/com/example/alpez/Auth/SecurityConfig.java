@@ -15,6 +15,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+// No need to import JwtRequestFilter since it's in the same package
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -33,13 +35,16 @@ public class SecurityConfig {
             .cors(withDefaults())
             .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless APIs
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/user/login", "/user/print", "/user/save", "/admin/login", "/user/update").permitAll()
-                .anyRequest().authenticated())
+                .requestMatchers("/user/login", "/user/print", "/user/save", "/admin/login", "/user/update", "/auth/error").permitAll()
+                .requestMatchers("/oauth2/**", "/login/oauth2/**", "/login/**").permitAll() // Allow all login and OAuth2 endpoints
+                .anyRequest().permitAll()) // Temporarily allow all requests to debug the redirect issue
             .oauth2Login(oauth2 -> oauth2
-                .successHandler(oauth2LoginSuccessHandler) 
+                .successHandler(oauth2LoginSuccessHandler)
+                .failureUrl("/auth/error?error=authentication_failed")
                 .userInfoEndpoint(userInfo -> userInfo.oidcUserService(oidcUserService()))
             )
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+            // Use default session management instead of STATELESS for OAuth2
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -56,7 +61,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(List.of("http://localhost:5173")); // Specify allowed origins
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allowed HTTP methods
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
+
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

@@ -4,44 +4,86 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="" />
+    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="review wishlist frontend web">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="destination-with-tourpackge" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;istroberiless&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ElReyDeLosGorditos/IT342-BituinDestinations.git&quot;,
+    &quot;accountId&quot;: &quot;90e33884-feb7-46c3-9206-7538ea65bc4b&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2sVc7n84iQpcUKpFAR405VXrKfv" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/l22x07w39/IT342-COMHUB",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;function&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kyle Inion/Desktop/now/IT342-BituinDestinations&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Service" />
+      <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Repo" />
+      <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\DTO" />
+      <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Controller" />
+      <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Entity" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Controller" />
+      <recent name="C:\Users\Kyle Inion\Desktop\IT342-BituinDestinations\frontend-web\BituinFrontWeb\src\pages" />
+      <recent name="C:\Users\Kyle Inion\Desktop\IT342-BituinDestinations\frontend-web\BituinFrontWeb\src\components\admin" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
       </set>
     </attachedChunks>
   </component>
@@ -56,10 +98,47 @@
       <workItem from="1738544018603" duration="2001000" />
       <workItem from="1738546043352" duration="2278000" />
       <workItem from="1739145998480" duration="3510000" />
+      <workItem from="1743946010613" duration="188000" />
+      <workItem from="1743983871910" duration="924000" />
+      <workItem from="1745155823955" duration="981000" />
+      <workItem from="1745423675292" duration="34674000" />
+      <workItem from="1745482729167" duration="9000" />
+      <workItem from="1745482764241" duration="2900000" />
+      <workItem from="1745513943859" duration="6184000" />
+      <workItem from="1745667443702" duration="42000" />
+      <workItem from="1745667744935" duration="192000" />
+      <workItem from="1745680145813" duration="4178000" />
+      <workItem from="1745728150376" duration="2086000" />
+      <workItem from="1745739292925" duration="35000" />
+      <workItem from="1745749775559" duration="259000" />
+      <workItem from="1745750137087" duration="144000" />
+      <workItem from="1745755131265" duration="32000" />
     </task>
+    <task id="LOCAL-00001" summary="here we go again">
+      <option name="closed" value="true" />
+      <created>1745423772051</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745423772051</updated>
+    </task>
+    <task id="LOCAL-00002" summary="review wishlist frontend web">
+      <option name="closed" value="true" />
+      <created>1745520457727</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1745520457727</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="here we go again" />
+    <MESSAGE value="review wishlist frontend web" />
+    <option name="LAST_COMMIT_MESSAGE" value="review wishlist frontend web" />
   </component>
 </project>

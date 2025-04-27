@@ -1,54 +1,91 @@
 package com.example.alpez.Controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.alpez.Entity.TourPackageEntity;
+import com.example.alpez.DTO.TourPackageDTO;
 import com.example.alpez.Service.TourPackageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin
-@RequestMapping("/tourpackage")
+@RequestMapping("/tour-packages")
+@CrossOrigin(origins = "http://localhost:5173")
 public class TourPackageController {
+
     @Autowired
-    TourPackageService tourpackageService;
+    private TourPackageService tourPackageService;
 
-    @GetMapping("/print")
-    public String print(){
-        return "I dont you!";
-    }
-
-    //CREATE
     @PostMapping("/save")
-    public TourPackageEntity saveTourPackage(@RequestBody TourPackageEntity tour){
-        return tourpackageService.saveTourPackage(tour);
+    public ResponseEntity<TourPackageDTO> saveTourPackage(@RequestBody TourPackageDTO tourPackageDTO) {
+        try {
+            TourPackageDTO savedTourPackage = tourPackageService.saveTourPackage(tourPackageDTO);
+            return new ResponseEntity<>(savedTourPackage, HttpStatus.CREATED);
+        } catch (Exception e) {
+            throw new RuntimeException("Error creating tour package: " + e.getMessage());
+        }
     }
 
-    //READ
     @GetMapping("/getAll")
-    public List<TourPackageEntity> getAllTourPackages(){
-        return tourpackageService.getAllTourPackage();
-    }
-   
-    //UPDATE
-    @PutMapping("/update/{packageId}")
-    public TourPackageEntity updateTourPackage(@PathVariable int packageId, @RequestBody TourPackageEntity tour){
-        return tourpackageService.updateTourPackage(packageId, tour);
+    public ResponseEntity<List<TourPackageDTO>> getAllTourPackages() {
+        try {
+            List<TourPackageDTO> tourPackages = tourPackageService.getAllTourPackages();
+            return new ResponseEntity<>(tourPackages, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving tour packages: " + e.getMessage());
+        }
     }
 
-    //DELETE
-    @DeleteMapping("/delete/{packageId}")
-    public String deleteReservation(@PathVariable int packageId){
-        return tourpackageService.deleteTourPackage(packageId);
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<TourPackageDTO> getTourPackageById(@PathVariable Integer id) {
+        try {
+            Optional<TourPackageDTO> tourPackageOpt = tourPackageService.getTourPackageById(id);
+            if (tourPackageOpt.isPresent()) {
+                return new ResponseEntity<>(tourPackageOpt.get(), HttpStatus.OK);
+            } else {
+                throw new RuntimeException("Tour package not found");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving tour package: " + e.getMessage());
+        }
     }
-}
+
+    @GetMapping("/getByDestination/{destinationId}")
+    public ResponseEntity<List<TourPackageDTO>> getTourPackagesByDestinationId(@PathVariable Integer destinationId) {
+        try {
+            List<TourPackageDTO> tourPackages = tourPackageService.getTourPackagesByDestinationId(destinationId);
+            return new ResponseEntity<>(tourPackages, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving tour packages: " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<TourPackageDTO> updateTourPackage(
+            @PathVariable Integer id,
+            @RequestBody TourPackageDTO tourPackageDTO) {
+        try {
+            TourPackageDTO updatedTourPackage = tourPackageService.updateTourPackage(id, tourPackageDTO);
+            if (updatedTourPackage != null) {
+                return new ResponseEntity<>(updatedTourPackage, HttpStatus.OK);
+            }
+            throw new RuntimeException("Tour package not found");
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating tour package: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteTourPackage(@PathVariable Integer id) {
+        try {
+            if (tourPackageService.deleteTourPackage(id)) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            throw new RuntimeException("Tour package not found");
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting tour package: " + e.getMessage());
+        }
+    }
+} 
