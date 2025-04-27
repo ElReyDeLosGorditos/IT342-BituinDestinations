@@ -20,6 +20,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Add proper height and overflow settings */
+html, body, #root {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-y: auto;
+  position: relative;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   font-weight: 500;
   color: #ffffff;

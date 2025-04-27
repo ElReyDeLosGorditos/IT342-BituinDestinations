@@ -1,0 +1,440 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function UserManagement() {
+    const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [roleFilter, setRoleFilter] = useState('ALL');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
+    const [currentUser, setCurrentUser] = useState(null);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        role: 'USER'
+    });
+    const [formMode, setFormMode] = useState('add');
+    const [message, setMessage] = useState({ text: '', type: '' });
+    const [loading, setLoading] = useState(false);
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [userToDelete, setUserToDelete] = useState(null);
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    useEffect(() => {
+        filterUsers();
+    }, [roleFilter, searchTerm, users]);
+
+    const fetchUsers = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get('http://localhost:8080/user/getAll');
+            setUsers(response.data);
+            setFilteredUsers(response.data);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+            setMessage({
+                text: 'Failed to load users',
+                type: 'error'
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const filterUsers = () => {
+        let results = users;
+
+        if (roleFilter !== 'ALL') {
+            results = results.filter(user => user.role === roleFilter);
+        }
+
+        if (searchTerm) {
+            const term = searchTerm.toLowerCase();
+            results = results.filter(user =>
+                user.name.toLowerCase().includes(term) ||
+                user.email.toLowerCase().includes(term)
+            );
+        }
+
+        setFilteredUsers(results);
+    };
+
+    const resetForm = () => {
+        setFormData({
+            name: '',
+            email: '',
+            password: '',
+            role: 'USER'
+        });
+        setCurrentUser(null);
+    };
+
+    const openAddModal = () => {
+        resetForm();
+        setFormMode('add');
+        setModalOpen(true);
+    };
+
+    const openEditModal = (user) => {
+        setFormData({
+            name: user.name,
+            email: user.email,
+            password: '',
+            role: user.role
+        });
+        setCurrentUser(user);
+        setFormMode('edit');
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+        resetForm();
+        setMessage({ text: '', type: '' });
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setMessage({ text: '', type: '' });
+
+        try {
+            if (formMode === 'add') {
+                const response = await axios.post('http://localhost:8080/user/save', formData);
+                setUsers(prev => [...prev, response.data]);
+                setMessage({ text: 'User created successfully!', type: 'success' });
+            } else {
+                const updatedUser = {
+                    ...formData,
+                    userId: currentUser.userId
+                };
+
+                if (!formData.password) {
+                    delete updatedUser.password;
+                }
+
+                const response = await axios.put(`http://localhost:8080/user/update/${currentUser.userId}`, updatedUser);
+                setUsers(prev =>
+                    prev.map(user => user.userId === currentUser.userId ? response.data : user)
+                );
+                setMessage({ text: 'User updated successfully!', type: 'success' });
+            }
+
+            setTimeout(closeModal, 1500);
+        } catch (error) {
+            console.error('Error saving user:', error);
+            setMessage({
+                text: error.response?.data?.message || 'An error occurred while saving user data',
+                type: 'error'
+            });
+        }
+    };
+
+    const handleDelete = (userId) => {
+        setUserToDelete(userId);
+        setShowDeleteConfirm(true);
+    };
+
+    const confirmDelete = async () => {
+        if (!userToDelete) return;
+
+        setLoading(true);
+        try {
+            await axios.delete(`http://localhost:8080/user/delete/${userToDelete}`);
+            setUsers(prev => prev.filter(user => user.userId !== userToDelete));
+            setMessage({ text: 'User deleted successfully!', type: 'success' });
+        } catch (error) {
+            setMessage({ text: error.response?.data?.message || 'Error deleting user', type: 'error' });
+        } finally {
+            setLoading(false);
+            setShowDeleteConfirm(false);
+            setUserToDelete(null);
+        }
+    };
+
+    const cancelDelete = () => {
+        setShowDeleteConfirm(false);
+        setUserToDelete(null);
+    };
+
+    return (
+        <div className="space-y-6">
+            {/* Header Section */}
+            <div className="bg-gradient-to-r from-amber-600 to-amber-700 rounded-xl p-6 shadow-sm">
+                <h2 className="text-2xl font-serif font-bold text-white">User Management</h2>
+                <p className="text-amber-100 mt-1">Manage and organize your application users</p>
+            </div>
+
+            {/* Controls Section */}
+            <div className="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div className="flex-1">
+                        <div className="relative">
+                            <input
+                                type="text"
+                                placeholder="Search by name or email..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full pl-10 pr-4 py-3 border-0 bg-stone-50 rounded-lg focus:ring-2 focus:ring-amber-300 transition-all"
+                            />
+                            <div className="absolute left-3 top-3 text-stone-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex-shrink-0 flex gap-4">
+                        <select
+                            value={roleFilter}
+                            onChange={(e) => setRoleFilter(e.target.value)}
+                            className="px-4 py-3 border-0 bg-stone-50 rounded-lg focus:ring-2 focus:ring-amber-300 transition-all"
+                        >
+                            <option value="ALL">All Roles</option>
+                            <option value="ADMIN">Admin</option>
+                            <option value="USER">User</option>
+                        </select>
+                        <button
+                            onClick={openAddModal}
+                            className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg shadow-sm transition duration-200 ease-in-out flex items-center justify-center"
+                            disabled={loading}
+                        >
+                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Add New User
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Message Display */}
+            {message.text && (
+                <div className={`p-4 rounded-lg shadow-sm transition-all duration-300 ${
+                    message.type === 'error' ? 'bg-red-100 text-red-700 border-l-4 border-red-500' :
+                        'bg-emerald-100 text-emerald-700 border-l-4 border-emerald-500'
+                }`}>
+                    <p className="font-medium">{message.text}</p>
+                </div>
+            )}
+
+            {/* Loading State */}
+            {loading && (
+                <div className="text-center py-10">
+                    <div className="inline-block w-12 h-12 border-4 border-amber-200 border-t-amber-600 rounded-full animate-spin"></div>
+                    <p className="mt-3 text-stone-600">Loading users...</p>
+                </div>
+            )}
+
+            {/* Users Table */}
+            <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-stone-200">
+                        <thead className="bg-stone-50">
+                            <tr>
+                                <th className="px-6 py-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">ID</th>
+                                <th className="px-6 py-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Name</th>
+                                <th className="px-6 py-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Email</th>
+                                <th className="px-6 py-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Role</th>
+                                <th className="px-6 py-4 text-right text-xs font-medium text-stone-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-stone-200">
+                            {filteredUsers.length > 0 ? (
+                                filteredUsers.map(user => (
+                                    <tr key={user.userId} className="hover:bg-stone-50 transition-colors">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-900">{user.userId}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-900">{user.name}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-900">{user.email}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                                                user.role === 'ADMIN' ? 'bg-amber-100 text-amber-800' : 'bg-stone-100 text-stone-800'
+                                            }`}>
+                                                {user.role}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <div className="flex justify-end space-x-2">
+                                                <button
+                                                    onClick={() => openEditModal(user)}
+                                                    className="text-amber-600 hover:text-amber-800"
+                                                >
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDelete(user.userId)}
+                                                    className="text-red-600 hover:text-red-800"
+                                                >
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5" className="px-6 py-8 text-center text-stone-500">
+                                        No users found matching the filters
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {/* User count */}
+            <div className="text-stone-500 text-sm">
+                Showing {filteredUsers.length} of {users.length} users
+            </div>
+
+            {/* Modal for Add/Edit User */}
+            {modalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+                    <div className="bg-white rounded-xl w-full max-w-md mx-4 shadow-xl overflow-hidden">
+                        <div className="p-6 border-b border-stone-200">
+                            <h3 className="text-xl font-serif font-bold text-stone-900">
+                                {formMode === 'add' ? 'Add New User' : 'Edit User'}
+                            </h3>
+                        </div>
+
+                        <form onSubmit={handleSubmit}>
+                            <div className="p-6 space-y-4">
+                                {message.text && (
+                                    <div className={`p-4 rounded-lg ${
+                                        message.type === 'error' ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'
+                                    }`}>
+                                        {message.text}
+                                    </div>
+                                )}
+
+                                <div>
+                                    <label className="block text-sm font-medium text-stone-700 mb-1">Name</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleInputChange}
+                                        required
+                                        className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-stone-700 mb-1">Email</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        required
+                                        disabled={formMode === 'edit'}
+                                        className={`w-full px-4 py-3 border border-stone-300 rounded-lg ${
+                                            formMode === 'edit' ? 'bg-stone-50' : ''
+                                        } focus:ring-2 focus:ring-amber-500 focus:border-amber-500`}
+                                    />
+                                    {formMode === 'edit' && (
+                                        <p className="mt-1 text-xs text-stone-500">Email cannot be changed</p>
+                                    )}
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-stone-700 mb-1">
+                                        {formMode === 'add' ? 'Password' : 'New Password (leave blank to keep current)'}
+                                    </label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={handleInputChange}
+                                        required={formMode === 'add'}
+                                        className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-stone-700 mb-1">Role</label>
+                                    <select
+                                        name="role"
+                                        value={formData.role}
+                                        onChange={handleInputChange}
+                                        className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                    >
+                                        <option value="USER">User</option>
+                                        <option value="ADMIN">Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="px-6 py-4 border-t border-stone-200 bg-stone-50 flex justify-end space-x-3">
+                                <button
+                                    type="button"
+                                    onClick={closeModal}
+                                    className="px-4 py-2 border border-stone-300 text-stone-700 rounded-lg hover:bg-stone-100 transition"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 shadow-sm transition"
+                                >
+                                    {formMode === 'add' ? 'Create User' : 'Update User'}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Delete Confirmation Modal */}
+            {showDeleteConfirm && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+                    <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-xl">
+                        <div className="text-center mb-6">
+                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-500 mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-stone-900 mb-2">Confirm Deletion</h3>
+                            <p className="text-stone-600">
+                                Are you sure you want to delete this user? This action cannot be undone.
+                            </p>
+                        </div>
+                        <div className="flex justify-end space-x-3">
+                            <button
+                                onClick={cancelDelete}
+                                className="px-4 py-2 border border-stone-300 text-stone-700 rounded-lg hover:bg-stone-100 transition"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={confirmDelete}
+                                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 shadow-sm transition"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default UserManagement;

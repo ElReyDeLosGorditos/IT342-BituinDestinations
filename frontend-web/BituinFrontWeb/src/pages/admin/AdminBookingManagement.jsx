@@ -8,6 +8,7 @@ function AdminBookingManagement() {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [selectedStatus, setSelectedStatus] = useState('ALL');
+    const [selectedPaymentStatus, setSelectedPaymentStatus] = useState('ALL');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,7 +18,6 @@ function AdminBookingManagement() {
     const fetchBookings = async () => {
         try {
             const response = await axios.get('http://localhost:8080/bookings');
-            // Fetch payment details for each booking
             const bookingsWithPayments = await Promise.all(
                 response.data.map(async (booking) => {
                     try {
@@ -28,7 +28,6 @@ function AdminBookingManagement() {
                         return { ...booking, payment: null };
                     } catch (error) {
                         console.error(`Error fetching payment for booking ${booking.id}:`, error);
-                        // Don't set payment to null, just return the booking as is
                         return booking;
                     }
                 })
@@ -56,7 +55,6 @@ function AdminBookingManagement() {
                         : booking
                 ));
 
-                // If booking is confirmed, show a message about receipt
                 if (newStatus === 'CONFIRMED') {
                     const booking = bookings.find(b => b.id === bookingId);
                     if (booking) {
@@ -77,11 +75,9 @@ function AdminBookingManagement() {
 
     const handlePaymentStatusChange = async (bookingId, newStatus) => {
         try {
-            // First, get the payment for this booking
             const paymentResponse = await axios.get(`http://localhost:8080/payments/booking/${bookingId}`);
             const payment = paymentResponse.data;
 
-            // Update the payment status
             const updateResponse = await axios.put(`http://localhost:8080/payments/${payment.id}`, {
                 paymentStatus: newStatus,
                 paymentAmount: payment.paymentAmount,
@@ -108,40 +104,61 @@ function AdminBookingManagement() {
         }
     };
 
-    const filteredBookings = selectedStatus === 'ALL' 
-        ? bookings 
-        : bookings.filter(booking => booking.bookingStatus === selectedStatus);
+    const filteredBookings = bookings.filter(booking => {
+        const statusMatch = selectedStatus === 'ALL' || booking.bookingStatus === selectedStatus;
+        const paymentMatch = selectedPaymentStatus === 'ALL' || 
+            (booking.payment?.paymentStatus === selectedPaymentStatus) ||
+            (selectedPaymentStatus === 'NO_PAYMENT' && !booking.payment);
+        return statusMatch && paymentMatch;
+    });
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-red-500">{error}</div>
+            <div className="text-center py-10">
+                <div className="inline-block w-12 h-12 border-4 border-amber-200 border-t-amber-600 rounded-full animate-spin"></div>
+                <p className="mt-3 text-stone-600">Loading bookings...</p>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900">Booking Management</h1>
-                    <div className="flex items-center space-x-4">
-                        <label htmlFor="status-filter" className="text-sm font-medium text-gray-700">
-                            Filter by Status:
+        <div className="space-y-6">
+            {/* Header Section */}
+            <div className="bg-gradient-to-r from-amber-600 to-amber-700 rounded-xl p-6 shadow-sm">
+                <div className="flex justify-between items-center">
+                    <div>
+                        <h2 className="text-2xl font-serif font-bold text-white">Booking Management</h2>
+                        <p className="text-amber-100 mt-1">View and manage all bookings across tour packages</p>
+                    </div>
+                    <div className="flex space-x-4">
+                        <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <p className="text-amber-100 text-sm">Confirmed</p>
+                            <p className="text-white font-bold text-xl">
+                                {bookings.filter(b => b.bookingStatus === 'CONFIRMED').length}
+                            </p>
+                        </div>
+                        <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <p className="text-amber-100 text-sm">Paid</p>
+                            <p className="text-white font-bold text-xl">
+                                {bookings.filter(b => b.payment?.paymentStatus === 'PAID').length}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Controls Section */}
+            <div className="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                <div className="flex items-center justify-between space-x-4">
+                    <div className="relative flex-1 max-w-md">
+                        <label htmlFor="status-filter" className="block text-sm font-medium text-stone-700 mb-1">
+                            Booking Status
                         </label>
                         <select
                             id="status-filter"
                             value={selectedStatus}
                             onChange={(e) => setSelectedStatus(e.target.value)}
-                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                            className="w-full pl-4 pr-10 py-3 border-0 bg-stone-50 rounded-lg focus:ring-2 focus:ring-amber-300 transition-all"
                         >
                             <option value="ALL">All Bookings</option>
                             <option value="PENDING">Pending</option>
@@ -149,85 +166,115 @@ function AdminBookingManagement() {
                             <option value="CANCELLED">Cancelled</option>
                         </select>
                     </div>
+                    <div className="relative flex-1 max-w-md">
+                        <label htmlFor="payment-filter" className="block text-sm font-medium text-stone-700 mb-1">
+                            Payment Status
+                        </label>
+                        <select
+                            id="payment-filter"
+                            value={selectedPaymentStatus}
+                            onChange={(e) => setSelectedPaymentStatus(e.target.value)}
+                            className="w-full pl-4 pr-10 py-3 border-0 bg-stone-50 rounded-lg focus:ring-2 focus:ring-amber-300 transition-all"
+                        >
+                            <option value="ALL">All Payments</option>
+                            <option value="PAID">Paid</option>
+                            <option value="PENDING">Pending</option>
+                            <option value="CANCELLED">Cancelled</option>
+                            <option value="NO_PAYMENT">No Payment</option>
+                        </select>
+                    </div>
                 </div>
+            </div>
 
-                {/* Success and Error Messages */}
-                {successMessage && (
-                    <div className="mb-4 p-4 bg-green-100 text-green-700 rounded-md">
-                        {successMessage}
-                    </div>
-                )}
-                {error && (
-                    <div className="mb-4 p-4 bg-red-100 text-red-700 rounded-md">
-                        {error}
-                    </div>
-                )}
+            {/* Messages */}
+            {successMessage && (
+                <div className="bg-emerald-100 text-emerald-700 border-l-4 border-emerald-500 p-4 rounded-lg shadow-sm">
+                    <p className="font-medium">{successMessage}</p>
+                </div>
+            )}
+            {error && (
+                <div className="bg-red-100 text-red-700 border-l-4 border-red-500 p-4 rounded-lg shadow-sm">
+                    <p className="font-medium">{error}</p>
+                </div>
+            )}
 
-                <div className="bg-white shadow overflow-hidden sm:rounded-md">
-                    <ul className="divide-y divide-gray-200">
+            {/* Bookings List */}
+            <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                {filteredBookings.length === 0 ? (
+                    <div className="text-center py-12">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-stone-100 text-stone-400 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                        </div>
+                        <h3 className="text-lg font-medium text-stone-900 mb-1">No Bookings Found</h3>
+                        <p className="text-stone-500">Try adjusting your filter criteria</p>
+                    </div>
+                ) : (
+                    <ul className="divide-y divide-stone-200">
                         {filteredBookings.map((booking) => (
-                            <li key={booking.id} className="px-4 py-4 sm:px-6">
-                                <div className="flex items-center justify-between">
+                            <li key={booking.id} className="p-6 hover:bg-stone-50 transition-colors">
+                                <div className="flex items-start justify-between">
                                     <div className="flex-1 min-w-0">
-                                        <div className="flex items-center justify-between">
-                                            <p className="text-lg font-medium text-indigo-600 truncate">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h3 className="text-lg font-medium text-stone-900">
                                                 {booking.tourPackage.title}
-                                            </p>
-                                            <div className="ml-2 flex-shrink-0 flex space-x-2">
-                                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                            </h3>
+                                            <div className="flex items-center space-x-2">
+                                                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                                                     booking.bookingStatus === 'CONFIRMED' 
-                                                        ? 'bg-green-100 text-green-800'
+                                                        ? 'bg-emerald-100 text-emerald-800'
                                                         : booking.bookingStatus === 'PENDING'
-                                                        ? 'bg-yellow-100 text-yellow-800'
+                                                        ? 'bg-amber-100 text-amber-800'
                                                         : 'bg-red-100 text-red-800'
                                                 }`}>
                                                     {booking.bookingStatus}
                                                 </span>
-                                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                                                     booking.payment?.paymentStatus === 'PAID' 
-                                                        ? 'bg-green-100 text-green-800'
+                                                        ? 'bg-emerald-100 text-emerald-800'
                                                         : booking.payment?.paymentStatus === 'PENDING'
-                                                        ? 'bg-yellow-100 text-yellow-800'
+                                                        ? 'bg-amber-100 text-amber-800'
                                                         : 'bg-red-100 text-red-800'
                                                 }`}>
                                                     {booking.payment?.paymentStatus || 'NO PAYMENT'}
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="mt-2 grid grid-cols-2 gap-4">
+                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                             <div>
-                                                <p className="text-sm text-gray-500">User</p>
-                                                <p className="text-sm font-medium text-gray-900">
+                                                <p className="text-sm text-stone-500">User</p>
+                                                <p className="text-sm font-medium text-stone-900">
                                                     {booking.user.name}
                                                 </p>
                                             </div>
                                             <div>
-                                                <p className="text-sm text-gray-500">Travel Date</p>
-                                                <p className="text-sm font-medium text-gray-900">
+                                                <p className="text-sm text-stone-500">Travel Date</p>
+                                                <p className="text-sm font-medium text-stone-900">
                                                     {new Date(booking.travelDate).toLocaleDateString()}
                                                 </p>
                                             </div>
                                             <div>
-                                                <p className="text-sm text-gray-500">Number of Travelers</p>
-                                                <p className="text-sm font-medium text-gray-900">
+                                                <p className="text-sm text-stone-500">Number of Travelers</p>
+                                                <p className="text-sm font-medium text-stone-900">
                                                     {booking.numOfTravelers}
                                                 </p>
                                             </div>
                                             <div>
-                                                <p className="text-sm text-gray-500">Total Price</p>
-                                                <p className="text-sm font-medium text-gray-900">
+                                                <p className="text-sm text-stone-500">Total Price</p>
+                                                <p className="text-sm font-medium text-stone-900">
                                                     ₱{booking.totalPrice.toLocaleString()}
                                                 </p>
                                             </div>
                                             <div>
-                                                <p className="text-sm text-gray-500">Payment Method</p>
-                                                <p className="text-sm font-medium text-gray-900">
+                                                <p className="text-sm text-stone-500">Payment Method</p>
+                                                <p className="text-sm font-medium text-stone-900">
                                                     {booking.paymentMethod}
                                                 </p>
                                             </div>
                                             <div>
-                                                <p className="text-sm text-gray-500">Payment Date</p>
-                                                <p className="text-sm font-medium text-gray-900">
+                                                <p className="text-sm text-stone-500">Payment Date</p>
+                                                <p className="text-sm font-medium text-stone-900">
                                                     {booking.payment?.paymentDate 
                                                         ? new Date(booking.payment.paymentDate).toLocaleString()
                                                         : 'N/A'}
@@ -236,11 +283,11 @@ function AdminBookingManagement() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="mt-4 flex justify-end space-x-4">
+                                <div className="mt-6 flex justify-end space-x-4">
                                     <select
                                         value={booking.bookingStatus}
                                         onChange={(e) => handleStatusChange(booking.id, e.target.value)}
-                                        className="mt-1 block w-40 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                        className="block w-40 pl-3 pr-10 py-2 text-base border-0 bg-stone-50 focus:ring-2 focus:ring-amber-300 rounded-lg transition-all"
                                     >
                                         <option value="PENDING">Pending</option>
                                         <option value="CONFIRMED">Confirmed</option>
@@ -250,18 +297,23 @@ function AdminBookingManagement() {
                                         <select
                                             value={booking.payment.paymentStatus}
                                             onChange={(e) => handlePaymentStatusChange(booking.id, e.target.value)}
-                                            className="mt-1 block w-40 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                                            className="block w-40 pl-3 pr-10 py-2 text-base border-0 bg-stone-50 focus:ring-2 focus:ring-amber-300 rounded-lg transition-all"
                                         >
-                                            <option value="PENDING">Payment Pending</option>
-                                            <option value="PAID">Payment Received</option>
-                                            <option value="FAILED">Payment Failed</option>
+                                            <option value="PENDING">Pending</option>
+                                            <option value="PAID">Paid</option>
+                                            <option value="CANCELLED">Cancelled</option>
                                         </select>
                                     )}
                                 </div>
                             </li>
                         ))}
                     </ul>
-                </div>
+                )}
+            </div>
+
+            {/* Booking count */}
+            <div className="text-stone-500 text-sm">
+                Showing {filteredBookings.length} of {bookings.length} bookings
             </div>
         </div>
     );
