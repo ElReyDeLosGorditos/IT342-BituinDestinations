@@ -10,5 +10,5 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo_bituin2" />
+        android:src="@drawable/logo_bituin3" />
 </RelativeLayout>
