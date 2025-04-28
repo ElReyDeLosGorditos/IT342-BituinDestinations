@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: my-springboot-app
+    env: docker
+    buildCommand: "./mvnw package -DskipTests"
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: JDBC_DATABASE_URL
+        fromDatabase:
+          name: jdbc:postgresql://dpg-d07cv9k9c44c739shp70-a.singapore-postgres.render.com/db_bituindestination
+          property: connectionString
+      - key: JDBC_DATABASE_USERNAME
+        fromDatabase:
+          name: db_bituindestination_user
+          property: user
+      - key: JDBC_DATABASE_PASSWORD
+        fromDatabase:
+          name: 8xldeDhhft0DWtmEuxmuxkfos9TG42al
+          property: password
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
