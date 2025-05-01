@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_icon_black"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profile_icon_black"
+            android:title="Update Profile" />
+        <item
+            android:id="@+id/nav_change_password"
+            android:icon="@drawable/password_icon"
+            android:title="Change Password" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout_icon_black"
+            android:title="Logout" />
+    </group>
+
+</menu>
