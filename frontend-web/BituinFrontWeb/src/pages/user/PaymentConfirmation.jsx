@@ -51,26 +51,26 @@ function PaymentConfirmation() {
     const isBookingConfirmed = booking.bookingStatus === 'CONFIRMED';
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-stone-100 pt-16">
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-stone-50 via-white to-amber-100 fixed inset-0 overflow-y-auto">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-stone-200">
                     {/* Header Section */}
-                    <div className="bg-gradient-to-r from-amber-700 to-stone-800 px-6 py-10 text-center">
-                        <div className="bg-white/10 backdrop-blur-sm w-20 h-20 rounded-full flex items-center justify-center mx-auto">
+                    <div className="bg-gradient-to-r from-stone-800 to-amber-900 px-6 py-8 text-center">
+                        <div className="bg-white/10 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center mx-auto">
                             {isBookingConfirmed ? (
-                                <svg className="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             ) : (
-                                <svg className="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             )}
                         </div>
-                        <h1 className="mt-6 text-3xl font-serif font-bold text-white">
-                            {isBookingConfirmed ? 'Booking Confirmed!' : 'Booking in Process'}
+                        <h1 className="mt-4 text-2xl font-serif font-bold text-white">
+                            {isBookingConfirmed ? 'Payment Confirmed!' : 'Payment in Process'}
                         </h1>
-                        <p className="mt-2 text-amber-100">
+                        <p className="mt-1 text-stone-200">
                             Payment Reference: #{payment.id}
                         </p>
                     </div>

@@ -24,16 +24,35 @@
 html, body, #root {
   height: 100%;
   overflow-x: hidden;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Fallback color */
 }
 
 body {
   overflow-y: auto;
   position: relative;
+  background-color: #f8f9fa; /* Fallback color */
 }
 
 #root {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Fallback color */
+}
+
+/* Ensure all pages extend to full height */
+.min-h-screen {
+  min-height: 100vh;
+  height: auto;
+  background-color: inherit;
+}
+
+/* Ensure gradient backgrounds extend fully */
+.bg-gradient-to-b {
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 a {

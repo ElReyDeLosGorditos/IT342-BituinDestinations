@@ -14,6 +14,7 @@ function MyBookings() {
         paymentMethod: 'CASH'
     });
     const [notification, setNotification] = useState('');
+    const [destinations, setDestinations] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,11 +37,13 @@ function MyBookings() {
                     try {
                         const paymentResponse = await axios.get(`http://localhost:8080/payments/booking/${booking.id}`);
                         const tourPackageResponse = await axios.get(`http://localhost:8080/tour-packages/getById/${booking.tourPackage.id}`);
+                        const destinationResponse = await axios.get(`http://localhost:8080/destination/getById/${tourPackageResponse.data.destinationId}`);
                         
                         return {
                             ...booking,
                             payment: paymentResponse.data,
-                            tourPackage: tourPackageResponse.data
+                            tourPackage: tourPackageResponse.data,
+                            destination: destinationResponse.data
                         };
                     } catch (error) {
                         console.error(`Error fetching details for booking ${booking.id}:`, error);
@@ -82,6 +85,19 @@ function MyBookings() {
     const handleEditSubmit = async (e) => {
         e.preventDefault();
         try {
+            // Calculate the difference in number of travelers
+            const travelerDiff = editFormData.numOfTravelers - selectedBooking.numOfTravelers;
+            
+            // Update the tour package's available slots
+            const updatedTourPackage = {
+                ...selectedBooking.tourPackage,
+                availableSlots: selectedBooking.tourPackage.availableSlots - travelerDiff
+            };
+
+            // First update the tour package
+            await axios.put(`http://localhost:8080/tour-packages/update/${selectedBooking.tourPackage.id}`, updatedTourPackage);
+
+            // Then update the booking
             const updatedBooking = {
                 travelDate: editFormData.travelDate,
                 numOfTravelers: editFormData.numOfTravelers,
@@ -155,7 +171,7 @@ function MyBookings() {
                 </div>
 
                 {notification && (
-                    <div className="mb-8 p-4 bg-olive-100 text-olive-700 rounded-xl border border-olive-200">
+                    <div className="mb-8 p-4 bg-amber-100 text-amber-800 rounded-xl border border-amber-200">
                         <div className="flex items-center justify-center">
                             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -166,7 +182,7 @@ function MyBookings() {
                 )}
 
                 {error && (
-                    <div className="mb-8 p-4 bg-red-100 text-red-700 rounded-xl border border-red-200">
+                    <div className="mb-8 p-4 bg-red-100 text-red-800 rounded-xl border border-red-200">
                         <div className="flex items-center justify-center">
                             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -179,14 +195,14 @@ function MyBookings() {
                 {bookings.length === 0 ? (
                     <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-stone-200">
                         <div className="max-w-md mx-auto">
-                            <svg className="w-16 h-16 mx-auto text-stone-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-16 h-16 mx-auto text-amber-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
                             <h3 className="text-xl font-semibold text-stone-800 mb-2">No Bookings Yet</h3>
                             <p className="text-stone-500 mb-6">Start your journey by exploring our amazing tour packages.</p>
                             <button
                                 onClick={() => navigate('/')}
-                                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-black bg-olive-600 hover:bg-olive-700 transition-colors duration-200"
+                                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-amber-600 hover:bg-amber-700 transition-colors duration-200"
                             >
                                 Browse Tour Packages
                             </button>
@@ -206,7 +222,7 @@ function MyBookings() {
                                                 <div className="flex gap-2">
                                                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                                                         booking.bookingStatus === 'CONFIRMED'
-                                                            ? 'bg-olive-100 text-olive-800'
+                                                            ? 'bg-emerald-100 text-emerald-800'
                                                             : booking.bookingStatus === 'PENDING'
                                                                 ? 'bg-amber-100 text-amber-800'
                                                                 : 'bg-red-100 text-red-800'
@@ -215,7 +231,7 @@ function MyBookings() {
                                                     </span>
                                                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                                                         booking.payment?.paymentStatus === 'PAID'
-                                                            ? 'bg-olive-100 text-olive-800'
+                                                            ? 'bg-emerald-100 text-emerald-800'
                                                             : booking.payment?.paymentStatus === 'PENDING'
                                                                 ? 'bg-amber-100 text-amber-800'
                                                                 : 'bg-red-100 text-red-800'
@@ -232,6 +248,10 @@ function MyBookings() {
                                                         <p className="font-medium text-stone-900">{booking.tourPackage.destinationName}</p>
                                                     </div>
                                                     <div>
+                                                        <p className="text-sm text-stone-500">Location</p>
+                                                        <p className="font-medium text-stone-900">{booking.destination?.destinationLocation || 'Location not specified'}</p>
+                                                    </div>
+                                                    <div>
                                                         <p className="text-sm text-stone-500">Travel Date</p>
                                                         <p className="font-medium text-stone-900">{new Date(booking.travelDate).toLocaleDateString()}</p>
                                                     </div>
@@ -243,7 +263,7 @@ function MyBookings() {
                                                 <div className="space-y-4">
                                                     <div>
                                                         <p className="text-sm text-stone-500">Total Price</p>
-                                                        <p className="font-medium text-stone-900">₱{booking.totalPrice.toLocaleString()}</p>
+                                                        <p className="font-medium text-amber-700">₱{booking.totalPrice.toLocaleString()}</p>
                                                     </div>
                                                     <div>
                                                         <p className="text-sm text-stone-500">Payment Method</p>
@@ -350,7 +370,7 @@ function MyBookings() {
                         </div>
 
                         {error && (
-                            <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-xl border border-red-200">
+                            <div className="mb-6 p-4 bg-red-100 text-red-800 rounded-xl border border-red-200">
                                 <div className="flex items-center">
                                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -373,7 +393,7 @@ function MyBookings() {
                                     min={new Date(selectedBooking.tourPackage.startDate).toISOString().split('T')[0]}
                                     max={new Date(selectedBooking.tourPackage.endDate).toISOString().split('T')[0]}
                                     required
-                                    className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-olive-300 focus:border-olive-300 transition-all bg-stone-50"
+                                    className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all bg-stone-50"
                                 />
                             </div>
 
@@ -389,7 +409,7 @@ function MyBookings() {
                                     min="1"
                                     max={selectedBooking.tourPackage.availableSlots + selectedBooking.numOfTravelers}
                                     required
-                                    className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-olive-300 focus:border-olive-300 transition-all bg-stone-50"
+                                    className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all bg-stone-50"
                                 />
                             </div>
 
@@ -402,7 +422,7 @@ function MyBookings() {
                                     value={editFormData.paymentMethod}
                                     onChange={handleInputChange}
                                     required
-                                    className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-olive-300 focus:border-olive-300 transition-all bg-stone-50"
+                                    className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all bg-stone-50"
                                 >
                                     <option value="CASH">Cash</option>
                                     <option value="CREDIT_CARD">Credit Card</option>
@@ -421,7 +441,7 @@ function MyBookings() {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-6 py-3 border border-transparent rounded-xl text-sm font-medium text-white bg-olive-600 hover:bg-olive-700 transition-colors duration-200"
+                                    className="px-6 py-3 border border-transparent rounded-xl text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 transition-colors duration-200"
                                 >
                                     Save Changes
                                 </button>

@@ -5,10 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="push">
+      <change afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/public/images/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/Dockerfile" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-mobile/BituinDestinations" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-mobile/IT342-BituinDestinations/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-mobile/IT342-BituinDestinations/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Landing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Landing.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Signup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingConfirmation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingConfirmation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingReceipt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingReceipt.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/MyBookings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/MyBookings.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentConfirmation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentConfirmation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Review.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Review.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackageDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackageDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Wishlist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Wishlist.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,26 +63,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "deploye-branch",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Kyle Inion/Desktop/main V2/IT342-BituinDestinations",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;deploye-branch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kyle Inion/Desktop/main/IT342-BituinDestinations&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Service" />
@@ -75,6 +92,7 @@
       <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Entity" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kyle Inion\Desktop\main\IT342-BituinDestinations\frontend-mobile" />
       <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Controller" />
       <recent name="C:\Users\Kyle Inion\Desktop\IT342-BituinDestinations\frontend-web\BituinFrontWeb\src\pages" />
       <recent name="C:\Users\Kyle Inion\Desktop\IT342-BituinDestinations\frontend-web\BituinFrontWeb\src\components\admin" />
@@ -115,6 +133,8 @@
       <workItem from="1745773104461" duration="1421000" />
       <workItem from="1745830362870" duration="1626000" />
       <workItem from="1745940110724" duration="818000" />
+      <workItem from="1746077298194" duration="733000" />
+      <workItem from="1746078066581" duration="2469000" />
     </task>
     <task id="LOCAL-00001" summary="here we go again">
       <option name="closed" value="true" />
@@ -190,6 +210,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/frontend-mobile/BituinDestinations" />
+    </ignored-roots>
     <MESSAGE value="here we go again" />
     <MESSAGE value="review wishlist frontend web" />
     <MESSAGE value="add bituindestination mobile folder" />

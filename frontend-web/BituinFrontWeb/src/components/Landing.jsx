@@ -6,7 +6,8 @@ function Landing() {
       {/* Hero Section */}
       <div
         className="pt-16 bg-gradient-to-r from-blue-500 to-purple-600 bg-cover bg-bottom h-screen relative"
-        style={{ backgroundImage: 'url(images/landingPage.jpg)' }}
+        style={{ backgroundImage: 'url(/images/landingPage.jpg)' }}
+
       >
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black opacity-30"></div> {/* Darker Overlay */}
