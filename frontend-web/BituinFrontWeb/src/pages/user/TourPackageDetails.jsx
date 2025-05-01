@@ -241,7 +241,7 @@ function TourPackageDetails() {
     const theme = getHeroTheme(tourPackage.destinationType);
 
     return (
-        <div className="bg-gradient-to-b from-amber-50 via-white to-stone-100 min-h-screen">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-stone-100 fixed inset-0 overflow-y-auto">
             {/* Hero Section */}
             <div className="relative h-[32rem] overflow-hidden">
                 {/* Background Image */}
@@ -378,7 +378,7 @@ function TourPackageDetails() {
                     {/* Right Column - Booking and Reviews */}
                     <div className="space-y-8">
                         {/* Booking Card */}
-                        <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sticky top-24">
+                        <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-6">
                             <h2 className="text-xl font-serif font-bold text-stone-800 mb-4">Book This Tour</h2>
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center">

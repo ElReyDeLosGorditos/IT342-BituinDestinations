@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="push">
+    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="with mobile">
+      <change afterPath="$PROJECT_DIR$/frontend-mobile/IT342-BituinDestinations" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +20,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -50,9 +49,9 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "deploye-branch",
+    "git-widget-placeholder": "mobile-app-branch",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Kyle Inion/Desktop/main V2/IT342-BituinDestinations",
+    "last_opened_file_path": "C:/Users/Kyle Inion/Desktop/main/IT342-BituinDestinations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -75,6 +74,7 @@
       <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Entity" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kyle Inion\Desktop\main\IT342-BituinDestinations\frontend-mobile" />
       <recent name="D:\b. Bituin Destinations\IT342-BituinDestinations\Backend\alpez\alpez\src\main\java\com\example\alpez\Controller" />
       <recent name="C:\Users\Kyle Inion\Desktop\IT342-BituinDestinations\frontend-web\BituinFrontWeb\src\pages" />
       <recent name="C:\Users\Kyle Inion\Desktop\IT342-BituinDestinations\frontend-web\BituinFrontWeb\src\components\admin" />
@@ -115,6 +115,8 @@
       <workItem from="1745773104461" duration="1421000" />
       <workItem from="1745830362870" duration="1626000" />
       <workItem from="1745940110724" duration="818000" />
+      <workItem from="1746077298194" duration="733000" />
+      <workItem from="1746078066581" duration="2879000" />
     </task>
     <task id="LOCAL-00001" summary="here we go again">
       <option name="closed" value="true" />
@@ -190,11 +192,16 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/frontend-mobile/BituinDestinations" />
+      <path value="$PROJECT_DIR$/frontend-mobile/IT342-BituinDestinations" />
+    </ignored-roots>
     <MESSAGE value="here we go again" />
     <MESSAGE value="review wishlist frontend web" />
     <MESSAGE value="add bituindestination mobile folder" />
     <MESSAGE value="ok na to" />
     <MESSAGE value="push" />
-    <option name="LAST_COMMIT_MESSAGE" value="push" />
+    <MESSAGE value="with mobile" />
+    <option name="LAST_COMMIT_MESSAGE" value="with mobile" />
   </component>
 </project>

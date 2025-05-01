@@ -7,6 +7,7 @@ function BookingReceipt() {
     const [booking, setBooking] = useState(null);
     const [tourPackage, setTourPackage] = useState(null);
     const [payment, setPayment] = useState(null);
+    const [destination, setDestination] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -21,6 +22,10 @@ function BookingReceipt() {
                 // Fetch tour package details
                 const packageResponse = await axios.get(`http://localhost:8080/tour-packages/getById/${bookingResponse.data.tourPackage.id}`);
                 setTourPackage(packageResponse.data);
+
+                // Fetch destination details
+                const destinationResponse = await axios.get(`http://localhost:8080/destination/getById/${packageResponse.data.destinationId}`);
+                setDestination(destinationResponse.data);
 
                 // Fetch payment details
                 const paymentResponse = await axios.get(`http://localhost:8080/payments/booking/${bookingId}`);
@@ -39,28 +44,28 @@ function BookingReceipt() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+            <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-amber-50 via-white to-stone-100">
+                <div className="animate-spin rounded-full h-12 w-12 border-4 border-amber-200 border-t-amber-600"></div>
             </div>
         );
     }
 
     if (error || !booking || !tourPackage) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-amber-50 via-white to-stone-100">
                 <div className="text-red-500">{error || 'Booking not found'}</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-stone-100 pt-16">
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-stone-100 fixed inset-0 overflow-y-auto">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-stone-200">
                     {/* Header Section */}
-                    <div className="bg-gradient-to-r from-amber-700 to-stone-800 px-6 py-10 text-center">
-                        <div className="bg-white/10 backdrop-blur-sm w-20 h-20 rounded-full flex items-center justify-center mx-auto">
-                            <svg className="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="bg-gradient-to-r from-amber-700 to-stone-800 px-8 py-10 text-center">
+                        <div className="bg-white/10 backdrop-blur-sm w-24 h-24 rounded-full flex items-center justify-center mx-auto">
+                            <svg className="h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                         </div>
@@ -75,7 +80,7 @@ function BookingReceipt() {
                             <div className="bg-stone-50 rounded-xl p-6 border border-stone-100">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center">
-                                        <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
+                                        <span className={`inline-block w-3 h-3 rounded-full mr-2 ${
                                             booking.bookingStatus === 'CONFIRMED' ? 'bg-emerald-500' :
                                             booking.bookingStatus === 'PENDING' ? 'bg-amber-500' :
                                             'bg-red-500'
@@ -90,31 +95,43 @@ function BookingReceipt() {
                         <div>
                             <h2 className="text-xl font-serif font-semibold text-stone-800 mb-4">Tour Package Details</h2>
                             <div className="bg-stone-50 rounded-xl p-6 border border-stone-100">
-                                <div className="space-y-4">
+                                <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-lg font-medium text-stone-800">{tourPackage.title}</h3>
+                                        <h3 className="text-xl font-medium text-stone-800">{tourPackage.title}</h3>
                                         <p className="text-stone-600 mt-2">{tourPackage.description}</p>
                                     </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <p className="text-sm text-stone-500">Destination</p>
-                                            <p className="font-medium text-stone-800">{tourPackage.destinationName}</p>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="space-y-4">
+                                            <div>
+                                                <p className="text-sm text-stone-500">Destination</p>
+                                                <p className="font-medium text-stone-800">{tourPackage.destinationName}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-stone-500">Location</p>
+                                                <p className="font-medium text-stone-800">{destination?.destinationLocation || 'Location not specified'}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-stone-500">Duration</p>
+                                                <p className="font-medium text-stone-800">{tourPackage.duration} days</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p className="text-sm text-stone-500">Travel Date</p>
-                                            <p className="font-medium text-stone-800">
-                                                {new Date(booking.travelDate).toLocaleDateString()}
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-stone-500">Number of Travelers</p>
-                                            <p className="font-medium text-stone-800">{booking.numOfTravelers}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-stone-500">Total Price</p>
-                                            <p className="font-medium text-stone-800">
-                                                ₱{booking.totalPrice.toLocaleString()}
-                                            </p>
+                                        <div className="space-y-4">
+                                            <div>
+                                                <p className="text-sm text-stone-500">Travel Date</p>
+                                                <p className="font-medium text-stone-800">
+                                                    {new Date(booking.travelDate).toLocaleDateString()}
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-stone-500">Number of Travelers</p>
+                                                <p className="font-medium text-stone-800">{booking.numOfTravelers}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-stone-500">Total Price</p>
+                                                <p className="font-medium text-amber-700">
+                                                    ₱{booking.totalPrice.toLocaleString()}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +152,7 @@ function BookingReceipt() {
                                             <div>
                                                 <p className="text-sm text-stone-500">Payment Status</p>
                                                 <div className="flex items-center">
-                                                    <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
+                                                    <span className={`inline-block w-3 h-3 rounded-full mr-2 ${
                                                         payment.paymentStatus === 'PAID' ? 'bg-emerald-500' :
                                                         payment.paymentStatus === 'PENDING' ? 'bg-amber-500' :
                                                         'bg-red-500'
@@ -171,6 +188,50 @@ function BookingReceipt() {
                                     </pre>
                                 </div>
                             </div>
+                        </div>
+
+                        {/* Important Information */}
+                        <div>
+                            <h2 className="text-xl font-serif font-semibold text-stone-800 mb-4">Important Information</h2>
+                            <div className="bg-amber-50 rounded-xl p-6 border border-amber-100">
+                                <div className="space-y-4">
+                                    <div className="flex items-start space-x-4">
+                                        <svg className="h-6 w-6 text-amber-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <div>
+                                            <p className="font-medium text-stone-800">Check-in Information</p>
+                                            <p className="text-stone-600 mt-1">Please arrive at the meeting point 30 minutes before the scheduled departure time.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start space-x-4">
+                                        <svg className="h-6 w-6 text-amber-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <div>
+                                            <p className="font-medium text-stone-800">What to Bring</p>
+                                            <p className="text-stone-600 mt-1">Valid ID, comfortable clothing, water bottle, and any necessary medications.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start space-x-4">
+                                        <svg className="h-6 w-6 text-amber-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
+                                        <div>
+                                            <p className="font-medium text-stone-800">Contact Information</p>
+                                            <p className="text-stone-600 mt-1">For any questions or concerns, please contact our support team at support@bituindestinations.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Enjoy Your Trip Section */}
+                        <div className="text-center py-8">
+                            <h2 className="text-2xl font-serif font-bold text-amber-700 mb-4">Enjoy Your Trip!</h2>
+                            <p className="text-stone-600 max-w-2xl mx-auto">
+                                We're excited to be part of your journey! Have a wonderful time exploring and creating unforgettable memories.
+                            </p>
                         </div>
 
                         {/* Action Buttons */}
