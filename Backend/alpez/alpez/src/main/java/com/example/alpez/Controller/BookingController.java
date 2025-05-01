@@ -40,13 +40,8 @@ public class BookingController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
         if (bookingService.getBookingById(id).isPresent()) {
-            boolean deleted = bookingService.deleteBooking(id);
-            if (deleted) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                // Booking is paid or cannot be deleted
-                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-            }
+            bookingService.deleteBooking(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
