@@ -9,12 +9,6 @@ public class EnvConfig {
     
     private static Dotenv dotenv;
     
-    @PostConstruct
-    public void init() {
-        // Load environment variables from .env file
-        dotenv = Dotenv.configure().load();
-        System.out.println("Environment variables loaded from .env file");
-    }
     
     /**
      * Get an environment variable value
