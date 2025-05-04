@@ -6,52 +6,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.alpez.Entity.UserEntity;
-import jakarta.annotation.PostConstruct;
 
 
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
-import com.example.alpez.config.EnvConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtil {
     private Key secretKey;
     private long expirationTime;
     
-    @PostConstruct
-    public void init() {
-        // Get JWT secret key from environment variable or use a default if not found
-        String jwtSecretKey = EnvConfig.get("JWT_SECRET_KEY");
-        if (jwtSecretKey != null && !jwtSecretKey.equals("your_jwt_secret_key_here")) {
-            // Use the provided secret key
-            this.secretKey = Keys.hmacShaKeyFor(jwtSecretKey.getBytes());
-        } else {
-            // Generate a random key if not provided
-            this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-        }
-        
-        // Get JWT expiration time from environment variable or use default
-        String expirationTimeStr = EnvConfig.get("JWT_EXPIRATION_MS");
-        if (expirationTimeStr != null) {
-            try {
-                this.expirationTime = Long.parseLong(expirationTimeStr);
-            } catch (NumberFormatException e) {
-                // Use default expiration time (1 hour) if parsing fails
-                this.expirationTime = 1000 * 60 * 60;
-            }
-        } else {
-            // Use default expiration time (1 hour) if not provided
-            this.expirationTime = 1000 * 60 * 60;
-        }
-    }
+    private static final String jwtSecretKey = "gWtwQIhiImoVfcOikyCTJIuI6HiKTYrp3Em7sk6cBh8";
+
      
 
-    // Generate token for UserEntity without role attribute
     public String generateToken(UserEntity user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("email", user.getEmail());
@@ -65,13 +36,7 @@ public class JwtUtil {
         return createToken(claims, email);
     }
 
-    // public String generateToken(AdminUserEntity admin) {
-    //     Map<String, Object> claims = new HashMap<>();
-    //     claims.put("email", admin.getEmail());
-    //     claims.put("username", admin.getName());
-    //     claims.put("role", admin.getRole()); // Specify admin role
-    //     return createToken(claims, String.valueOf(admin.getadminId()));
-    // }
+   
     public String generateToken(OAuth2User oAuth2User) {
         Map<String, Object> claims = new HashMap<>();
         
