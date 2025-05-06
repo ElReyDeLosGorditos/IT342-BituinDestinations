@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tour-packages")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://it-342-bituin-destinations.vercel.app")
 public class TourPackageController {
 
     @Autowired

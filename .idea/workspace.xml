@@ -4,30 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="deployment undo">
+    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="backend link to the frontend">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Signup.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/AuthCallback.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/AuthCallback.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/AdminBookingManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/AdminBookingManagement.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/DestinationManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/DestinationManagement.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/ReviewManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/ReviewManagement.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/TourPackageManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/TourPackageManagement.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/UserManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/UserManagement.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingConfirmation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingConfirmation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingReceipt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingReceipt.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/DestinationBrowser.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/DestinationBrowser.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/MyBookings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/MyBookings.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentConfirmation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentConfirmation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Review.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Review.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackageDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackageDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackagesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackagesList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Wishlist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Wishlist.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/DestinationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/DestinationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/ReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/TourPackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/TourPackageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/WishlistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/WishlistController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +22,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="destination-with-tourpackge" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,7 +65,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "front-backendlink",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Kyle Inion/Desktop/cloned/IT342-BituinDestinations",
     "node.js.detected.package.eslint": "true",
@@ -158,7 +143,8 @@
       <workItem from="1746092297735" duration="526000" />
       <workItem from="1746092901087" duration="4000" />
       <workItem from="1746092983849" duration="1023000" />
-      <workItem from="1746511149546" duration="1551000" />
+      <workItem from="1746511149546" duration="3215000" />
+      <workItem from="1746515367351" duration="316000" />
     </task>
     <task id="LOCAL-00001" summary="here we go again">
       <option name="closed" value="true" />
@@ -224,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746093387717</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="backend link to the frontend">
+      <option name="closed" value="true" />
+      <created>1746513094530</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1746513094530</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +247,7 @@
     <MESSAGE value="push" />
     <MESSAGE value="with mobile" />
     <MESSAGE value="deployment undo" />
-    <option name="LAST_COMMIT_MESSAGE" value="deployment undo" />
+    <MESSAGE value="backend link to the frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="backend link to the frontend" />
   </component>
 </project>

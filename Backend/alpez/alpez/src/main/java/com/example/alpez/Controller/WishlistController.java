@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/wishlist")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://it-342-bituin-destinations.vercel.app")
 public class WishlistController {
 
     private final WishlistService wishlistService;
