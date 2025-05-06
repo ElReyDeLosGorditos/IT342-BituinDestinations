@@ -41,7 +41,7 @@ function DestinationBrowser() {
     const fetchDestinations = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('http://localhost:8080/destination/getAll');
+            const response = await axios.get('https://it342-bituindestinations-qrwd.onrender.com/destination/getAll');
             setDestinations(response.data);
         } catch (error) {
             setError('Failed to load destinations');
@@ -91,7 +91,7 @@ function DestinationBrowser() {
         // Fetch tour packages for the selected destination
         try {
             setLoadingPackages(true);
-            const response = await axios.get(`http://localhost:8080/tour-packages/getByDestination/${destination.id}`);
+            const response = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/getByDestination/${destination.id}`);
             setTourPackages(response.data);
         } catch (error) {
             console.error('Error fetching tour packages:', error);
@@ -299,7 +299,7 @@ function DestinationBrowser() {
                                         <div className="relative h-56 overflow-hidden">
                                             <img
                                                 src={destination.destinationImage ?
-                                                    `http://localhost:8080/files/${destination.destinationImage || "/placeholder.svg"}` :
+                                                    `https://it342-bituindestinations-qrwd.onrender.com/files/${destination.destinationImage || "/placeholder.svg"}` :
                                                     '/placeholder-image.jpg'}
                                                 alt={destination.destinationName}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -349,7 +349,7 @@ function DestinationBrowser() {
                             <div className="h-80 bg-stone-200">
                                 <img
                                     src={selectedDestination.destinationImage ?
-                                        `http://localhost:8080/files/${selectedDestination.destinationImage || "/placeholder.svg"}` :
+                                        `https://it342-bituindestinations-qrwd.onrender.com/files/${selectedDestination.destinationImage || "/placeholder.svg"}` :
                                         '/placeholder-image.jpg'}
                                     alt={selectedDestination.destinationName}
                                     className="w-full h-full object-cover rounded-t-2xl"
@@ -437,7 +437,7 @@ function DestinationBrowser() {
                                                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/70"></div>
                                                 <img
                                                     src={selectedDestination.destinationImage ?
-                                                        `http://localhost:8080/files/${selectedDestination.destinationImage}` :
+                                                        `https://it342-bituindestinations-qrwd.onrender.com/files/${selectedDestination.destinationImage}` :
                                                         '/placeholder-image.jpg'}
                                                     alt={pkg.title}
                                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"

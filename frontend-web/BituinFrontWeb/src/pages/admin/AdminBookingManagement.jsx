@@ -17,11 +17,11 @@ function AdminBookingManagement() {
 
     const fetchBookings = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/bookings');
+            const response = await axios.get('https://it342-bituindestinations-qrwd.onrender.com/bookings');
             const bookingsWithPayments = await Promise.all(
                 response.data.map(async (booking) => {
                     try {
-                        const paymentResponse = await axios.get(`http://localhost:8080/payments/booking/${booking.id}`);
+                        const paymentResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/payments/booking/${booking.id}`);
                         if (paymentResponse.data) {
                             return { ...booking, payment: paymentResponse.data };
                         }
@@ -43,7 +43,7 @@ function AdminBookingManagement() {
 
     const handleStatusChange = async (bookingId, newStatus) => {
         try {
-            const response = await axios.put(`http://localhost:8080/bookings/${bookingId}/status`, null, {
+            const response = await axios.put(`https://it342-bituindestinations-qrwd.onrender.com/bookings/${bookingId}/status`, null, {
                 params: { status: newStatus }
             });
             
@@ -75,10 +75,10 @@ function AdminBookingManagement() {
 
     const handlePaymentStatusChange = async (bookingId, newStatus) => {
         try {
-            const paymentResponse = await axios.get(`http://localhost:8080/payments/booking/${bookingId}`);
+            const paymentResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/payments/booking/${bookingId}`);
             const payment = paymentResponse.data;
 
-            const updateResponse = await axios.put(`http://localhost:8080/payments/${payment.id}`, {
+            const updateResponse = await axios.put(`https://it342-bituindestinations-qrwd.onrender.com/payments/${payment.id}`, {
                 paymentStatus: newStatus,
                 paymentAmount: payment.paymentAmount,
                 paymentMethod: payment.paymentMethod,

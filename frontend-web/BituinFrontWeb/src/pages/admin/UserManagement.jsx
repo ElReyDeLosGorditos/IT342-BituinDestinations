@@ -31,7 +31,7 @@ function UserManagement() {
     const fetchUsers = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('http://localhost:8080/user/getAll');
+            const response = await axios.get('https://it342-bituindestinations-qrwd.onrender.com/user/getAll');
             setUsers(response.data);
             setFilteredUsers(response.data);
         } catch (error) {
@@ -111,7 +111,7 @@ function UserManagement() {
 
         try {
             if (formMode === 'add') {
-                const response = await axios.post('http://localhost:8080/user/save', formData);
+                const response = await axios.post('https://it342-bituindestinations-qrwd.onrender.com/user/save', formData);
                 setUsers(prev => [...prev, response.data]);
                 setMessage({ text: 'User created successfully!', type: 'success' });
             } else {
@@ -124,7 +124,7 @@ function UserManagement() {
                     delete updatedUser.password;
                 }
 
-                const response = await axios.put(`http://localhost:8080/user/update/${currentUser.userId}`, updatedUser);
+                const response = await axios.put(`https://it342-bituindestinations-qrwd.onrender.com/user/update/${currentUser.userId}`, updatedUser);
                 setUsers(prev =>
                     prev.map(user => user.userId === currentUser.userId ? response.data : user)
                 );
@@ -151,7 +151,7 @@ function UserManagement() {
 
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:8080/user/delete/${userToDelete}`);
+            await axios.delete(`https://it342-bituindestinations-qrwd.onrender.com/user/delete/${userToDelete}`);
             setUsers(prev => prev.filter(user => user.userId !== userToDelete));
             setMessage({ text: 'User deleted successfully!', type: 'success' });
         } catch (error) {

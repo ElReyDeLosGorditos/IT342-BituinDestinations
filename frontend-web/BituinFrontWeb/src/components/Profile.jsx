@@ -26,7 +26,7 @@ function Profile() {
 
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/user/getUserById?userId=${userId}`)
+        const response = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/user/getUserById?userId=${userId}`)
         if (response.data) {
           setUser(response.data)
         }
@@ -69,7 +69,7 @@ function Profile() {
     }
 
     try {
-      const response = await axios.put(`http://localhost:8080/user/update/${user.userId}`, user)
+      const response = await axios.put(`https://it342-bituindestinations-qrwd.onrender.com/user/update/${user.userId}`, user)
       
       if (response.data) {
         setMessage({ text: 'Profile updated successfully!', type: 'success' })

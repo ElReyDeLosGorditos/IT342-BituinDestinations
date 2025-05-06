@@ -68,10 +68,10 @@ function BookingForm({ tourPackage, onClose }) {
                 availableSlots: tourPackage.availableSlots - formData.numOfTravelers
             };
 
-            await axios.put(`http://localhost:8080/tour-packages/update/${tourPackage.id}`, updatedTourPackage);
+            await axios.put(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/update/${tourPackage.id}`, updatedTourPackage);
 
             // Then create the booking
-            const response = await axios.post('http://localhost:8080/bookings', bookingData);
+            const response = await axios.post('https://it342-bituindestinations-qrwd.onrender.com/bookings', bookingData);
 
             // Create payment
             const paymentData = {
@@ -81,7 +81,7 @@ function BookingForm({ tourPackage, onClose }) {
                 bookingId: response.data.id
             };
 
-            await axios.post('http://localhost:8080/payments', paymentData);
+            await axios.post('https://it342-bituindestinations-qrwd.onrender.com/payments', paymentData);
 
             // Navigate to booking confirmation page
             navigate(`/booking-confirmation/${response.data.id}`);

@@ -15,7 +15,7 @@ function Review({ tourPackageId, isAdmin }) {
     const fetchReviews = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`http://localhost:8080/reviews/tour/${tourPackageId}`);
+            const response = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/reviews/tour/${tourPackageId}`);
             setReviews(response.data);
         } catch (error) {
             setError('Failed to load reviews');
@@ -39,7 +39,7 @@ function Review({ tourPackageId, isAdmin }) {
                 tourPackageId: parseInt(tourPackageId)
             };
 
-            await axios.post('http://localhost:8080/reviews', reviewData);
+            await axios.post('https://it342-bituindestinations-qrwd.onrender.com/reviews', reviewData);
             setNewReview({ rating: 5, comment: '' });
             fetchReviews();
         } catch (error) {
@@ -50,7 +50,7 @@ function Review({ tourPackageId, isAdmin }) {
     const handleDeleteReview = async (reviewId) => {
         try {
             setDeleteLoading(reviewId);
-            await axios.delete(`http://localhost:8080/reviews/${reviewId}`);
+            await axios.delete(`https://it342-bituindestinations-qrwd.onrender.com/reviews/${reviewId}`);
             fetchReviews();
         } catch (error) {
             setError('Failed to delete review');

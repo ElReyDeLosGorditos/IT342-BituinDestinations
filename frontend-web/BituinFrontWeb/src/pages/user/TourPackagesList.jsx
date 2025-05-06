@@ -13,7 +13,7 @@ function TourPackagesList({ destinationId }) {
         }
         setBookingLoadingId(pkg.id);
         try {
-            const response = await axios.post('http://localhost:8080/booking/create', {
+            const response = await axios.post('https://it342-bituindestinations-qrwd.onrender.com/booking/create', {
                 userId,
                 packageId: pkg.id
             });
@@ -33,7 +33,7 @@ function TourPackagesList({ destinationId }) {
         const fetchPackages = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:8080/tour-packages/getByDestination/${destinationId}`);
+                const response = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/getByDestination/${destinationId}`);
                 setPackages(response.data);
                 setError(null);
             } catch (err) {

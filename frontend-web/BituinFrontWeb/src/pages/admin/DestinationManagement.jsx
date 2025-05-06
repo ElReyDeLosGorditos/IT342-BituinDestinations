@@ -35,7 +35,7 @@ function DestinationManagement() {
     const fetchDestinations = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('http://localhost:8080/destination/getAll');
+            const response = await axios.get('https://it342-bituindestinations-qrwd.onrender.com/destination/getAll');
             setDestinations(response.data);
         } catch (error) {
             setMessage({ text: 'Failed to load destinations', type: 'error' });
@@ -90,9 +90,9 @@ function DestinationManagement() {
 
             let response;
             if (formMode === 'add') {
-                response = await axios.post('http://localhost:8080/destination/save', formDataToSend, config);
+                response = await axios.post('https://it342-bituindestinations-qrwd.onrender.com/destination/save', formDataToSend, config);
             } else {
-                response = await axios.put(`http://localhost:8080/destination/update/${currentDestination.id}`, formDataToSend, config);
+                response = await axios.put(`https://it342-bituindestinations-qrwd.onrender.com/destination/update/${currentDestination.id}`, formDataToSend, config);
             }
 
             setMessage({ text: `Destination ${formMode === 'add' ? 'created' : 'updated'} successfully!`, type: 'success' });
@@ -117,7 +117,7 @@ function DestinationManagement() {
 
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:8080/destination/delete/${destinationToDelete}`);
+            await axios.delete(`https://it342-bituindestinations-qrwd.onrender.com/destination/delete/${destinationToDelete}`);
             setDestinations(prev => prev.filter(d => d.id !== destinationToDelete));
             setMessage({ text: 'Destination deleted successfully!', type: 'success' });
         } catch (error) {
@@ -290,7 +290,7 @@ function DestinationManagement() {
                                 <div key={destination.id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-stone-200 hover:shadow-md transition-shadow duration-300">
                                     <div className="relative h-60">
                                         <img
-                                            src={destination.destinationImage ? `http://localhost:8080/files/${destination.destinationImage}` : '/placeholder-image.jpg'}
+                                            src={destination.destinationImage ? `https://it342-bituindestinations-qrwd.onrender.com/files/${destination.destinationImage}` : '/placeholder-image.jpg'}
                                             alt={destination.destinationName}
                                             className="w-full h-full object-cover"
                                         />

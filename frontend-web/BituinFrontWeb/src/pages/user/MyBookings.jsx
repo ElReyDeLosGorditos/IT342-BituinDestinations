@@ -29,15 +29,15 @@ function MyBookings() {
                 return;
             }
 
-            const response = await axios.get(`http://localhost:8080/bookings/user/${userId}`);
+            const response = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/bookings/user/${userId}`);
 
             // Fetch payment details and tour package details for each booking
             const bookingsWithPayments = await Promise.all(
                 response.data.map(async (booking) => {
                     try {
-                        const paymentResponse = await axios.get(`http://localhost:8080/payments/booking/${booking.id}`);
-                        const tourPackageResponse = await axios.get(`http://localhost:8080/tour-packages/getById/${booking.tourPackage.id}`);
-                        const destinationResponse = await axios.get(`http://localhost:8080/destination/getById/${tourPackageResponse.data.destinationId}`);
+                        const paymentResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/payments/booking/${booking.id}`);
+                        const tourPackageResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/getById/${booking.tourPackage.id}`);
+                        const destinationResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/destination/getById/${tourPackageResponse.data.destinationId}`);
                         
                         return {
                             ...booking,
@@ -95,7 +95,7 @@ function MyBookings() {
             };
 
             // First update the tour package
-            await axios.put(`http://localhost:8080/tour-packages/update/${selectedBooking.tourPackage.id}`, updatedTourPackage);
+            await axios.put(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/update/${selectedBooking.tourPackage.id}`, updatedTourPackage);
 
             // Then update the booking
             const updatedBooking = {
@@ -105,7 +105,7 @@ function MyBookings() {
                 totalPrice: selectedBooking.tourPackage.price * editFormData.numOfTravelers
             };
 
-            await axios.put(`http://localhost:8080/bookings/${selectedBooking.id}`, updatedBooking);
+            await axios.put(`https://it342-bituindestinations-qrwd.onrender.com/bookings/${selectedBooking.id}`, updatedBooking);
             setShowEditModal(false);
             fetchBookings(); // Refresh the bookings list
             navigate(`/booking-confirmation/${selectedBooking.id}`);
@@ -125,7 +125,7 @@ function MyBookings() {
 
     const handleDeleteBooking = async (bookingId) => {
         try {
-            const response = await axios.delete(`http://localhost:8080/bookings/${bookingId}`);
+            const response = await axios.delete(`https://it342-bituindestinations-qrwd.onrender.com/bookings/${bookingId}`);
             if (response.status === 204) {
                 setNotification('Booking deleted successfully');
                 setTimeout(() => setNotification(''), 5000);

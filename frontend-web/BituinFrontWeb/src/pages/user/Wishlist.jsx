@@ -16,12 +16,12 @@ function Wishlist() {
         try {
             setLoading(true);
             const userId = localStorage.getItem('userId');
-            const response = await axios.get(`http://localhost:8080/wishlist/${userId}`);
+            const response = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/wishlist/${userId}`);
             setWishlistItems(response.data);
 
             // Fetch tour package details for each wishlist item
             const packagePromises = response.data.map(item =>
-                axios.get(`http://localhost:8080/tour-packages/getById/${item.tourPackageId}`)
+                axios.get(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/getById/${item.tourPackageId}`)
             );
             const packageResponses = await Promise.all(packagePromises);
             const packageMap = {};
@@ -39,7 +39,7 @@ function Wishlist() {
     const removeFromWishlist = async (tourPackageId) => {
         try {
             const userId = localStorage.getItem('userId');
-            await axios.delete(`http://localhost:8080/wishlist?userId=${userId}&tourPackageId=${tourPackageId}`);
+            await axios.delete(`https://it342-bituindestinations-qrwd.onrender.com/wishlist?userId=${userId}&tourPackageId=${tourPackageId}`);
             setWishlistItems(wishlistItems.filter(item => item.tourPackageId !== tourPackageId));
             const newPackages = { ...tourPackages };
             delete newPackages[tourPackageId];

@@ -26,7 +26,7 @@ function TourPackageDetails() {
     const fetchTourPackageDetails = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`http://localhost:8080/tour-packages/getById/${id}`);
+            const response = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/getById/${id}`);
             setTourPackage(response.data);
         } catch (error) {
             setError('Failed to load tour package details');
@@ -40,7 +40,7 @@ function TourPackageDetails() {
             const userId = localStorage.getItem('userId');
             if (!userId) return;
 
-            const response = await axios.get(`http://localhost:8080/wishlist/${userId}`);
+            const response = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/wishlist/${userId}`);
             const isInWishlist = response.data.some(item => item.tourPackageId === parseInt(id));
             setIsInWishlist(isInWishlist);
         } catch (error) {
@@ -58,9 +58,9 @@ function TourPackageDetails() {
 
             setWishlistLoading(true);
             if (isInWishlist) {
-                await axios.delete(`http://localhost:8080/wishlist?userId=${userId}&tourPackageId=${id}`);
+                await axios.delete(`https://it342-bituindestinations-qrwd.onrender.com/wishlist?userId=${userId}&tourPackageId=${id}`);
             } else {
-                await axios.post('http://localhost:8080/wishlist', {
+                await axios.post('https://it342-bituindestinations-qrwd.onrender.com/wishlist', {
                     userId: parseInt(userId),
                     tourPackageId: parseInt(id)
                 });

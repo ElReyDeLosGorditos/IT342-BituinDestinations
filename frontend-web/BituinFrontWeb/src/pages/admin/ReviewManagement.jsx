@@ -21,7 +21,7 @@ function ReviewManagement() {
 
     const fetchTourPackages = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/tour-packages/getAll');
+            const response = await axios.get('https://it342-bituindestinations-qrwd.onrender.com/tour-packages/getAll');
             const packagesMap = {};
             response.data.forEach(pkg => {
                 packagesMap[pkg.id] = pkg.title;
@@ -35,7 +35,7 @@ function ReviewManagement() {
     const fetchAllReviews = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('http://localhost:8080/reviews');
+            const response = await axios.get('https://it342-bituindestinations-qrwd.onrender.com/reviews');
             setReviews(response.data);
         } catch (error) {
             setError('Failed to load reviews');
@@ -64,7 +64,7 @@ function ReviewManagement() {
     const handleDeleteReview = async (reviewId) => {
         try {
             setDeleteLoading(reviewId);
-            await axios.delete(`http://localhost:8080/reviews/${reviewId}`);
+            await axios.delete(`https://it342-bituindestinations-qrwd.onrender.com/reviews/${reviewId}`);
             fetchAllReviews();
         } catch (error) {
             setError('Failed to delete review');

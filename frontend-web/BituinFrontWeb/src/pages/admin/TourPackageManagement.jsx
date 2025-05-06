@@ -37,7 +37,7 @@ function TourPackageManagement() {
 
     const fetchDestinations = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/destination/getAll');
+            const response = await axios.get('https://it342-bituindestinations-qrwd.onrender.com/destination/getAll');
             if (Array.isArray(response.data)) {
                 setDestinations(response.data);
             } else {
@@ -53,7 +53,7 @@ function TourPackageManagement() {
     const fetchTourPackages = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('http://localhost:8080/tour-packages/getAll');
+            const response = await axios.get('https://it342-bituindestinations-qrwd.onrender.com/tour-packages/getAll');
             setTourPackages(response.data);
             setFilteredPackages(response.data);
         } catch (error) {
@@ -142,10 +142,10 @@ function TourPackageManagement() {
             };
 
             if (formMode === 'add') {
-                await axios.post('http://localhost:8080/tour-packages/save', packageData);
+                await axios.post('https://it342-bituindestinations-qrwd.onrender.com/tour-packages/save', packageData);
                 setMessage({ text: 'Tour package created successfully!', type: 'success' });
             } else {
-                await axios.put(`http://localhost:8080/tour-packages/update/${currentPackage.id}`, packageData);
+                await axios.put(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/update/${currentPackage.id}`, packageData);
                 setMessage({ text: 'Tour package updated successfully!', type: 'success' });
             }
 
@@ -167,7 +167,7 @@ function TourPackageManagement() {
     const confirmDelete = async () => {
         if (!packageToDelete) return;
         try {
-            await axios.delete(`http://localhost:8080/tour-packages/delete/${packageToDelete}`);
+            await axios.delete(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/delete/${packageToDelete}`);
             setTourPackages(prev => prev.filter(pkg => pkg.id !== packageToDelete));
             setMessage({ text: 'Tour package deleted successfully!', type: 'success' });
         } catch (error) {

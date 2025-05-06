@@ -14,11 +14,11 @@ function PaymentConfirmation() {
         const fetchPaymentAndBookingDetails = async () => {
             try {
                 // Fetch payment details
-                const paymentResponse = await axios.get(`http://localhost:8080/payments/booking/${bookingId}`);
+                const paymentResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/payments/booking/${bookingId}`);
                 setPayment(paymentResponse.data);
 
                 // Fetch booking details
-                const bookingResponse = await axios.get(`http://localhost:8080/bookings/${bookingId}`);
+                const bookingResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/bookings/${bookingId}`);
                 setBooking(bookingResponse.data);
 
                 setLoading(false);
