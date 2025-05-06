@@ -14,7 +14,7 @@ import java.nio.file.Path;
 
 @RestController
 @RequestMapping("/files")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://it-342-bituin-destinations.vercel.app")
 public class FileController {
 
     @Autowired
