@@ -41,14 +41,14 @@ function Login() {
 
     try {
       // Call the login API
-      const response = await axios.post('http://localhost:8080/user/login', formData)
+      const response = await axios.post('https://it342-bituindestinations-qrwd.onrender.com/user/login', formData)
 
       if (response.data.status === 'success') {
         // Store login status
         localStorage.setItem('isLoggedIn', 'true')
 
         // Get user ID and role by email
-        const userResponse = await axios.get(`http://localhost:8080/user/getAll`)
+        const userResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/user/getAll`)
         const users = userResponse.data
         const user = users.find(u => u.email === formData.email)
 
@@ -88,7 +88,7 @@ function Login() {
 
   // Handle Google login
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/google'
+    window.location.href = 'https://it342-bituindestinations-qrwd.onrender.com/oauth2/authorization/google'
   }
 
   return (

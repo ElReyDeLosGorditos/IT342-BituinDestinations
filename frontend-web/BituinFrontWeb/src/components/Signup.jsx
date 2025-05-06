@@ -25,7 +25,7 @@ function Signup() {
 
     try {
       // Send registration request to backend
-      const response = await axios.post('http://localhost:8080/user/save', {
+      const response = await axios.post('https://it342-bituindestinations-qrwd.onrender.com/user/save', {
         name: formData.name,
         email: formData.email,
         password: formData.password,

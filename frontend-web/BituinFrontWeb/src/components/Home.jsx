@@ -23,7 +23,7 @@ function Home() {
   const fetchDestinations = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8080/destination/getAll');
+      const response = await axios.get('https://it342-bituindestinations-qrwd.onrender.com/getAll');
       setDestinations(response.data);
     } catch (err) {
       setError('Failed to load destinations');
@@ -84,7 +84,7 @@ function Home() {
             {filteredDestinations.map(destination => (
                 <div key={destination.id} className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
                   <img
-                      src={destination.destinationImage ? `http://localhost:8080/files/${destination.destinationImage}` : '/images/placeholder.jpg'}
+                      src={destination.destinationImage ? `https://it342-bituindestinations-qrwd.onrender.com/files/${destination.destinationImage}` : '/images/placeholder.jpg'}
                       alt={destination.destinationName}
                       className="w-full h-48 object-cover"
                   />

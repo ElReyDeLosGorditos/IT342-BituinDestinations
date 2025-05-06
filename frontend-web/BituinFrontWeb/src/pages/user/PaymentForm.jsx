@@ -46,7 +46,7 @@ function PaymentForm({ booking, onClose }) {
                 bookingId: booking.id
             };
 
-            await axios.post('http://localhost:8080/payments', paymentData);
+            await axios.post('https://it342-bituindestinations-qrwd.onrender.com/payments', paymentData);
 
             // Navigate to payment confirmation page with the booking ID
             navigate(`/payment-confirmation/${booking.id}`);

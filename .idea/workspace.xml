@@ -6,8 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="deployment undo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/components/Signup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/AuthCallback.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/AuthCallback.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/AdminBookingManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/AdminBookingManagement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/DestinationManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/DestinationManagement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/ReviewManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/ReviewManagement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/TourPackageManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/TourPackageManagement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/UserManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/admin/UserManagement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingConfirmation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingConfirmation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingReceipt.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/BookingReceipt.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/DestinationBrowser.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/DestinationBrowser.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/MyBookings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/MyBookings.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentConfirmation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentConfirmation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/PaymentForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Review.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Review.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackageDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackageDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackagesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/TourPackagesList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Wishlist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-web/BituinFrontWeb/src/pages/user/Wishlist.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,22 +49,22 @@
     &quot;assignee&quot;: &quot;istroberiless&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ElReyDeLosGorditos/IT342-BituinDestinations.git",
-    "accountId": "90e33884-feb7-46c3-9206-7538ea65bc4b"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ElReyDeLosGorditos/IT342-BituinDestinations.git&quot;,
+    &quot;accountId&quot;: &quot;90e33884-feb7-46c3-9206-7538ea65bc4b&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "ElReyDeLosGorditos",
-    "repository": "IT342-BituinDestinations"
+    &quot;owner&quot;: &quot;ElReyDeLosGorditos&quot;,
+    &quot;repository&quot;: &quot;IT342-BituinDestinations&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -60,7 +80,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#44 on deploye-branch",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Kyle Inion/Desktop/cloned/IT342-BituinDestinations",
     "node.js.detected.package.eslint": "true",
@@ -138,6 +158,7 @@
       <workItem from="1746092297735" duration="526000" />
       <workItem from="1746092901087" duration="4000" />
       <workItem from="1746092983849" duration="1023000" />
+      <workItem from="1746511149546" duration="1551000" />
     </task>
     <task id="LOCAL-00001" summary="here we go again">
       <option name="closed" value="true" />

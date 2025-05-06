@@ -30,7 +30,7 @@ function AuthCallback() {
       // Fetch user role
       const fetchUserRole = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/user/getUserById?userId=${userId}`);
+          const response = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/user/getUserById?userId=${userId}`);
           if (response.data && response.data.role) {
             localStorage.setItem('userRole', response.data.role);
 

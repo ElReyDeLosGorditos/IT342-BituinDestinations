@@ -17,15 +17,15 @@ function BookingConfirmation() {
         const fetchBookingAndPayment = async () => {
             try {
                 setLoading(true);
-                const bookingResponse = await axios.get(`http://localhost:8080/bookings/${bookingId}`);
+                const bookingResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/bookings/${bookingId}`);
                 setBooking(bookingResponse.data);
 
                 // Fetch tour package details
-                const packageResponse = await axios.get(`http://localhost:8080/tour-packages/getById/${bookingResponse.data.tourPackage.id}`);
+                const packageResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/getById/${bookingResponse.data.tourPackage.id}`);
                 setTourPackage(packageResponse.data);
 
                 // Fetch payment details
-                const paymentResponse = await axios.get(`http://localhost:8080/payments/booking/${bookingId}`);
+                const paymentResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/payments/booking/${bookingId}`);
                 setPayment(paymentResponse.data);
             } catch (error) {
                 setError('Failed to load booking details');

@@ -16,19 +16,19 @@ function BookingReceipt() {
         const fetchBookingDetails = async () => {
             try {
                 // Fetch booking details
-                const bookingResponse = await axios.get(`http://localhost:8080/bookings/${bookingId}`);
+                const bookingResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/bookings/${bookingId}`);
                 setBooking(bookingResponse.data);
 
                 // Fetch tour package details
-                const packageResponse = await axios.get(`http://localhost:8080/tour-packages/getById/${bookingResponse.data.tourPackage.id}`);
+                const packageResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/tour-packages/getById/${bookingResponse.data.tourPackage.id}`);
                 setTourPackage(packageResponse.data);
 
                 // Fetch destination details
-                const destinationResponse = await axios.get(`http://localhost:8080/destination/getById/${packageResponse.data.destinationId}`);
+                const destinationResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/destination/getById/${packageResponse.data.destinationId}`);
                 setDestination(destinationResponse.data);
 
                 // Fetch payment details
-                const paymentResponse = await axios.get(`http://localhost:8080/payments/booking/${bookingId}`);
+                const paymentResponse = await axios.get(`https://it342-bituindestinations-qrwd.onrender.com/payments/booking/${bookingId}`);
                 setPayment(paymentResponse.data);
 
                 setLoading(false);
