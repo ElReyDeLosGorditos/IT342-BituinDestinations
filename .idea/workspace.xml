@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="backend link to the frontend">
+    <list default="true" id="8972c987-e30e-45f9-9dfa-086152b29d44" name="Changes" comment="crossorigin update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Auth/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/DestinationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/DestinationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/ReviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/TourPackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/TourPackageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/WishlistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/alpez/alpez/src/main/java/com/example/alpez/Controller/WishlistController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +58,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "front-backendlink",
+    "git-widget-placeholder": "#53 on front-backendlink",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Kyle Inion/Desktop/cloned/IT342-BituinDestinations",
     "node.js.detected.package.eslint": "true",
@@ -144,7 +137,7 @@
       <workItem from="1746092901087" duration="4000" />
       <workItem from="1746092983849" duration="1023000" />
       <workItem from="1746511149546" duration="3215000" />
-      <workItem from="1746515367351" duration="316000" />
+      <workItem from="1746515367351" duration="1793000" />
     </task>
     <task id="LOCAL-00001" summary="here we go again">
       <option name="closed" value="true" />
@@ -218,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746513094530</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="crossorigin update">
+      <option name="closed" value="true" />
+      <created>1746515747681</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1746515747681</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,6 +249,7 @@
     <MESSAGE value="with mobile" />
     <MESSAGE value="deployment undo" />
     <MESSAGE value="backend link to the frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="backend link to the frontend" />
+    <MESSAGE value="crossorigin update" />
+    <option name="LAST_COMMIT_MESSAGE" value="crossorigin update" />
   </component>
 </project>
