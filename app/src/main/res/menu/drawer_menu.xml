@@ -7,13 +7,13 @@
             android:icon="@drawable/home_icon_black"
             android:title="Home" />
         <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/profile_icon_black"
-            android:title="Update Profile" />
+            android:id="@+id/nav_whislist"
+            android:icon="@drawable/wishlist_icon"
+            android:title="Whislist" />
         <item
-            android:id="@+id/nav_change_password"
-            android:icon="@drawable/password_icon"
-            android:title="Change Password" />
+            android:id="@+id/nav_booking"
+            android:icon="@drawable/booking_icon"
+            android:title="Bookings" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout_icon_black"

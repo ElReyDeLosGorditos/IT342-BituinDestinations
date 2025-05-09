@@ -17,6 +17,36 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".BookingDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SeeBookingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookingConfirmedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ToursActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DestinationToursActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DestinationDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WhislistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.WhislistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BeachActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity

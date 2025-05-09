@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private const val BASE_URL = "http://192.168.110.252:8080/"  // Use your actual local IP
+    private const val BASE_URL = "https://it342-bituindestinations-qrwd.onrender.com"  // Use your actual local IP
 
     // Retrofit instance creation
     val instance: ApiService by lazy {

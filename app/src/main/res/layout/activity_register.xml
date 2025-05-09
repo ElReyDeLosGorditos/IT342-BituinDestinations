@@ -37,9 +37,21 @@
         android:layout_marginBottom="30dp"/>
 
     <EditText
+        android:id="@+id/editTextRegUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_graybg"
+        android:textSize="16sp"
+        android:hint="Enter username"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        android:textColorHint="#80000000" />
+
+    <EditText
         android:id="@+id/editTextRegEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@drawable/button_graybg"
         android:textSize="16sp"
         android:hint="Email Address"
@@ -81,39 +93,6 @@
         android:text="Sign Up"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Or signup with"
-        android:textColor="#000000"
-        android:textSize="16sp" />
-
-    <LinearLayout
-        android:id="@+id/buttonSignUpWithGoogle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_graybg"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="16dp">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/google_icon"
-            android:contentDescription="Google icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="SignUp with Google"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

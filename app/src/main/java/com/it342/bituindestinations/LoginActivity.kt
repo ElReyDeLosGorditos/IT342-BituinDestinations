@@ -1,174 +1,114 @@
 package com.it342.bituindestinations
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.it342.bituindestinations.api.ApiService
 import com.it342.bituindestinations.api.RetrofitClient
 import com.it342.bituindestinations.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.it342.bituindestinations.app.MyApplication
-import com.it342.bituindestinations.utils.toast
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.auth.api.identity.SignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
-class LoginActivity : Activity() {
+class LoginActivity : AppCompatActivity() {
 
-    private lateinit var signInClient: SignInClient
-    private lateinit var signInRequest: BeginSignInRequest
+    private lateinit var editTextEmail: EditText
+    private lateinit var editTextPassword: EditText
+    private lateinit var buttonSignIn: Button
+    private lateinit var textViewSignUp: TextView
+    private lateinit var apiService: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val buttonContinueWithGoogle = findViewById<LinearLayout>(R.id.buttonContinueWithGoogle)
-        buttonContinueWithGoogle.setOnClickListener {
-            // Start Google sign-in process
-            initiateGoogleSignIn()
-        }
+        // Initialize UI elements using correct IDs from your layout
+        editTextEmail = findViewById(R.id.editInTextEmail)
+        editTextPassword = findViewById(R.id.editInTextPassword)
+        buttonSignIn = findViewById(R.id.buttonSignIn)
+        textViewSignUp = findViewById(R.id.textViewGotoSignUp)
 
-        val editInTextEmail = findViewById<EditText>(R.id.editInTextEmail)
-        val editInTextPassword = findViewById<EditText>(R.id.editInTextPassword)
+        // Initialize ApiService using RetrofitClient
+        apiService = RetrofitClient.instance
 
-        // Optional: Pre-fill email and password from previous registration (MyApplication)
-        editInTextEmail.setText((application as MyApplication).email)
-        editInTextPassword.setText((application as MyApplication).password)
-
-        val buttonSignIn = findViewById<Button>(R.id.buttonSignIn)
+        // Set click listeners for buttons
         buttonSignIn.setOnClickListener {
-            val email = editInTextEmail.text.toString()
-            val password = editInTextPassword.text.toString()
+            // Perform login validation
+            val email = editTextEmail.text.toString().trim()
+            val password = editTextPassword.text.toString().trim()
 
-            // Validate the input
-            if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-                toast("Email and Password cannot be empty")
-                return@setOnClickListener
+            if (isValidInput(email, password)) {
+                // Call the login API
+                loginUser(email, password)
             }
-
-            // Create User object, make sure to pass all required fields
-            val user = User(
-                userId = 0,
-                name = "",
-                email = email,
-                password = password,
-                role = "USER"  // Default role
-            )
-
-            // Perform login via Retrofit
-            loginUser(user)
         }
 
-        // Go to SignUp screen
-        val goToSignUp = findViewById<TextView>(R.id.textViewGotoSignUp)
-        goToSignUp.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
-        }
-
-        // Initialize Google Sign-In Client
-        signInClient = Identity.getSignInClient(this)
-        signInRequest = BeginSignInRequest.builder()
-            .setPasswordRequestOptions(
-                BeginSignInRequest.PasswordRequestOptions.builder()
-                    .setSupported(true)
-                    .build()
-            )
-            .build()
-    }
-
-    private fun initiateGoogleSignIn() {
-        signInClient.beginSignIn(signInRequest)
-            .addOnSuccessListener { result ->
-                try {
-                    // Use startIntentSenderForResult to start the sign-in activity
-                    startIntentSenderForResult(
-                        result.pendingIntent.intentSender,
-                        REQUEST_GOOGLE_SIGN_IN,
-                        null, // You can pass additional data here if needed
-                        0, 0, 0
-                    )
-                } catch (e: Exception) {
-                    // Handle any potential errors
-                    Toast.makeText(this, "Error starting sign-in intent: ${e.message}", Toast.LENGTH_LONG).show()
-                }
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(this, "Google Sign-In failed: ${exception.message}", Toast.LENGTH_LONG).show()
-            }
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQUEST_GOOGLE_SIGN_IN && resultCode == Activity.RESULT_OK) {
-            val account: GoogleSignInAccount? = GoogleSignIn.getSignedInAccountFromIntent(data).result
-
-            if (account != null) {
-                val googleUserId = account.id // Google's unique ID for the user
-                val name = account.displayName
-                val email = account.email
-                val token = account.idToken
-
-                // Save relevant data, using "userId" for consistency
-                val sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-                val editor = sharedPref.edit()
-                editor.putString("googleToken", token).apply() // You might want to save the Google token
-                editor.putString("userName", name).apply()
-                editor.putString("userEmail", email).apply()
-
-                // For your app's internal user ID (if your backend associates Google users with your system's IDs)
-                // you might need to send the Google ID to your backend and retrieve your app's userId.
-                // For now, let's just save the Google ID under "userId" for simplicity in ProfileActivity.
-                editor.putString("userId", googleUserId).apply() // Saving Google's ID as userId
-
-                startActivity(Intent(this, HomeActivity::class.java))
-                finish()
-            } else {
-                Toast.makeText(this, "Google Sign-In failed", Toast.LENGTH_LONG).show()
-            }
-        } else {
-            Toast.makeText(this, "Google Sign-In failed", Toast.LENGTH_LONG).show()
+        textViewSignUp.setOnClickListener {
+            // Handle sign up functionality (intent to registration activity)
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 
-    private fun loginUser(user: User) {
-        RetrofitClient.instance.loginUser(user).enqueue(object : Callback<User> {
+    private fun isValidInput(email: String, password: String): Boolean {
+        if (email.isEmpty()) {
+            editTextEmail.error = "Email is required"
+            return false
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            editTextEmail.error = "Invalid email address"
+            return false
+        }
+        if (password.isEmpty()) {
+            editTextPassword.error = "Password is required"
+            return false
+        }
+        return true
+    }
+
+    private fun loginUser(email: String, password: String) {
+        // Assuming your User model constructor is: User(userId, name, email, password, role)
+        val user = User(0, email, password, "","USER") // Set userId to 0 for login, name might be empty or unused for login
+        val call = apiService.loginUser(user)
+
+        call.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     val loggedInUser = response.body()
-                    val userId = loggedInUser?.userId
-                    Log.d("LoginActivity", "User ID from server: $userId")
-                    if (userId != null) {
-                        val sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-                        val editor = sharedPref.edit()
-                        editor.putInt("userId", userId)
-                        editor.apply()
-                        Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_LONG).show()
-                        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                    if (loggedInUser != null) {
+                        Log.d("LoginActivity", "Logged in user name being sent: ${loggedInUser.name}")
+                        val userId = loggedInUser.userId.toString()
+                        val name = loggedInUser.name
+                        val userEmail = loggedInUser.email
+                        val userPassword = loggedInUser.password
+
+                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        intent.putExtra("userId", userId)
+                        intent.putExtra("name", name)
+                        intent.putExtra("email", userEmail)
+                        intent.putExtra("password", userPassword)
+                        startActivity(intent)
                         finish()
+                        Toast.makeText(this@LoginActivity, "Login successful!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Login failed: User object is null", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this@LoginActivity, "Error: Invalid credentials", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginActivity, "Login failed: " + response.message(), Toast.LENGTH_SHORT).show()
                 }
+
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Toast.makeText(this@LoginActivity, "Failure: ${t.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@LoginActivity, "Error: " + t.message, Toast.LENGTH_SHORT).show()
             }
         })
-    }
-
-    companion object {
-        const val REQUEST_GOOGLE_SIGN_IN = 1001
     }
 }

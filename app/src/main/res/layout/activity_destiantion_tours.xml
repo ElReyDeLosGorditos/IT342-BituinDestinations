@@ -38,69 +38,21 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
-                android:text="Home"
+                android:text="Available Tour Packages"
                 android:textSize="20sp" />
 
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <EditText
-                android:id="@+id/searchEditText"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/search_color"
-                android:hint="Search your journey"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:paddingStart="16dp"
-                android:paddingEnd="48dp"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_search"
-                android:focusable="false"
-                android:clickable="false" />
-
-        </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-medium"
-                android:text="Available destinations to explore"
-                android:textColor="#333333"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/destinationRecyclerView"
+            android:id="@+id/tourRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:padding="4dp"
+            android:layout_weight="1"
             android:clipToPadding="false"
-            />
+            android:padding="4dp" />
 
-    </LinearLayout>
+    </LinearLayout> <!-- Correct closing tag -->
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -110,4 +62,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/drawer_menu" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

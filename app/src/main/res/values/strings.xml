@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BituinDestinations</string>
+    <string-array name="payment_methods">
+        <item>Cash</item>
+        <item>Credit Card</item>
+        <item>GCash</item>
+        <item>PayMaya</item>
+    </string-array>
 </resources>

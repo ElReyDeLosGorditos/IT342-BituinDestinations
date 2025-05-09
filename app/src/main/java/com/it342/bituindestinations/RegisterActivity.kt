@@ -20,6 +20,7 @@ class RegisterActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        val editTextRegUsername = findViewById<EditText>(R.id.editTextRegUsername) // Get reference to the new EditText
         val editTextRegEmail = findViewById<EditText>(R.id.editTextRegEmail)
         val editTextRegPassword = findViewById<EditText>(R.id.editTextRegPassword)
         val editTextRegConfirmPassword = findViewById<EditText>(R.id.editTextRegConfirmPassword)
@@ -27,28 +28,32 @@ class RegisterActivity : Activity() {
         val buttonSignUp = findViewById<Button>(R.id.buttonSignUp)
         buttonSignUp.setOnClickListener {
 
-            // Basic Validation
-            if (editTextRegEmail.isNotValid() || editTextRegPassword.isNotValid()
-                || editTextRegConfirmPassword.isNotValid()) {
+            val username = editTextRegUsername.text.toString().trim() // Get the username
+            val email = editTextRegEmail.text.toString().trim()
+            val password = editTextRegPassword.text.toString()
+            val confirmPassword = editTextRegConfirmPassword.text.toString()
+
+            // Basic Validation (include username)
+            if (username.isNullOrEmpty() || email.isNullOrEmpty() || password.isNullOrEmpty()
+                || confirmPassword.isNullOrEmpty()) {
                 toast("Any form cannot be empty")
                 return@setOnClickListener
             }
 
             // Validate the email format
-            val email = editTextRegEmail.text.toString()
             if (!isValidEmail(email)) {
                 toast("Invalid email format")
                 return@setOnClickListener
             }
 
             // Check if password and confirm password match
-            if (editTextRegPassword.text.toString() != editTextRegConfirmPassword.text.toString()) {
+            if (password != confirmPassword) {
                 toast("Passwords do not match")
                 return@setOnClickListener
             }
 
-            // Proceed with the registration process
-            saveRegistration(email, editTextRegPassword.text.toString())
+            // Proceed with the registration process, including the username
+            saveRegistration(username, email, password)
         }
 
         // Link to Sign In page
@@ -64,9 +69,9 @@ class RegisterActivity : Activity() {
         return email.matches(Regex(emailPattern))
     }
 
-    private fun saveRegistration(email: String, password: String) {
-        // Create a User object with the provided data
-        val user = User(userId = 0, name = "", email = email, password = password, role = "USER")
+    private fun saveRegistration(username: String, email: String, password: String) {
+        // Create a User object with the provided data (include username)
+        val user = User(userId = 0, name = username, email = email, password = password, role = "USER")
 
         // Send the user data to the backend using Retrofit
         RetrofitClient.instance.saveUser(user).enqueue(object : Callback<User> {
@@ -78,7 +83,7 @@ class RegisterActivity : Activity() {
                     // Redirect to the login screen
                     startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                 } else {
-                    // Handle error (e.g., email already exists)
+                    // Handle error (e.g., email already exists, username might also need checking on the backend)
                     Toast.makeText(this@RegisterActivity, "Error: ${response.message()}", Toast.LENGTH_LONG).show()
                 }
             }

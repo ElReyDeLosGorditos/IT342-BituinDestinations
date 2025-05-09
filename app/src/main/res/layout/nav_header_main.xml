@@ -12,16 +12,16 @@
         android:id="@+id/imageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/logo_bituin" />
+        android:src="@drawable/logo_bituin3" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/userNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="User Name"
+        android:text="Settings"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="30dp"
         android:textStyle="bold" />
 
 </LinearLayout>
